@@ -25,3 +25,54 @@ We have a feature in Adform that identifies unwanted bot traffic. It’s backed 
   * Static
   * .NET Core
   * SIMD?
+
+
+
+What it isn't about:
+* .NET vs JVM vs C++
+* .NET is awesome!!!
+* GC
+
+
+
+### Domain:
+unwanted bot traffic
+
+
+
+### Algorithm:
+https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm
+http://blog.ivank.net/aho-corasick-algorithm-in-as3.html
+TODO: http://www.cs.uku.fi/~kilpelai/BSA05/lectures/slides04.pdf
+TODO: https://www.quora.com/What-is-the-most-intuitive-explanation-of-the-Aho-Corasick-string-matching-algorithm
+the only .NET implementation: https://www.informit.com/guides/content.aspx?g=dotnet&seqNum=769
+
+
+
+### Harness:
+
+#### Microbenchmarks:
+https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/performance-guidelines.md#creating-a-microbenchmark
+
+#### Profiling:
+"Profilers Are Lying Hobbits (and we hate them!)" https://www.infoq.com/presentations/profilers-hotspots-bottlenecks
+Perfview
+
+#### IL & Assembly code:
+ildasm & ILSpy
+Windbg - the great and powerful
+TODO: https://github.com/snare/voltron
+
+
+
+### Optimizations:
+#### Know APIs of libraries you use
+#### Know BCL collections and data structures
+#### Know advanced data structures
+
+
+
+### Experiments
+#### "All is Fair in Love and War"
+#### .NET Core
+#### SIMD
