@@ -20,6 +20,7 @@ We have a feature in Adform that identifies unwanted bot traffic. It’s backed 
 0. Optimizations:
   * Re-implement BCL
   * Open address hashset
+  * Branchless code
   * Further micro optimizations
 0. Experiments
   * Static
@@ -52,6 +53,31 @@ the only .NET implementation: https://www.informit.com/guides/content.aspx?g=dot
 ### Harness:
 
 #### Microbenchmarks:
+
+is hard!
+
+Pipeline:
+A task -> C#
+C# + Compiler -> IL
+IL + BCL + 3rdParty -> App
+App + CLR -> ASM
+ASM + CPU -> Result
+
+Infrastructure:
+OS: Windows, Linux, OS X
+CLR: CLR2, CLR4, CoreCLR, Mono
+GC: MS, Boehm, Sgen
+JIT: Legacy x86 & x64, RyuJIT
+Compilation: JIT, NGen, MPGO, .NET Native
+
+DOs & DON'Ts from Microsoft:
+
+- **DO** use a microbenchmark when you have an isolated piece of code whose performance you want to analyze.
+- **DO NOT** use a microbenchmark for code that has non-deterministic dependences (e.g. network calls, file I/O etc.)
+- **DO** run all performance testing against retail optimized builds.
+- **DO** run many iterations of the code in question to filter out noise.
+- **DO** minimize the effects of other applications on the performance of the microbenchmark by closing as many unnecessary applications as possible.
+
 https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/performance-guidelines.md#creating-a-microbenchmark
 
 #### Profiling:
@@ -61,6 +87,10 @@ Perfview
 #### IL & Assembly code:
 ildasm & ILSpy
 Windbg - the great and powerful
+SOS Sun of Strike
+SOSex
+HOWTO: Debugging .NET with WinDbg https://docs.google.com/document/d/1yMQ8NAQZEBtsfVp7AsFLSA_MkIKlYNuSowG72_nU0ek
+
 TODO: https://github.com/snare/voltron
 
 
@@ -70,9 +100,20 @@ TODO: https://github.com/snare/voltron
 #### Know BCL collections and data structures
 #### Know advanced data structures
 
+CPU cache:
+L3 hit ~40 cycles
+L3 miss, memory read ~200 cycles
+
 
 
 ### Experiments
 #### "All is Fair in Love and War"
 #### .NET Core
 #### SIMD
+
+
+
+### Further reads
+Pro .NET Performance by Sasha Goldshtein , Dima Zurbalev , Ido Flatow
+Writing High-Performance .NET Code by Ben Watson
+A fundamental introduction to x86 assembly programming https://www.nayuki.io/page/a-fundamental-introduction-to-x86-assembly-programming
