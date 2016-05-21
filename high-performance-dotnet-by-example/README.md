@@ -28,6 +28,10 @@ We have a feature in Adform that identifies unwanted bot traffic. It’s backed 
   * SIMD?
 
 
+### Prerequisites:
+- ildasm, ILSpy
+- WinDBG
+- PerfView
 
 What it isn't about:
 * .NET vs JVM vs C++
@@ -79,6 +83,18 @@ DOs & DON'Ts from Microsoft:
 - **DO** minimize the effects of other applications on the performance of the microbenchmark by closing as many unnecessary applications as possible.
 
 https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/performance-guidelines.md#creating-a-microbenchmark
+
+##### BenchmarkDotNet:
+- A sample benchmark
+- Config
+- Diagnosers
+
+How does it work: https://github.com/PerfDotNet/BenchmarkDotNet#how-it-works
+
+- Isolated project based on templates
+- MethodInvoker: Pilot, Idle, Warmup, Target, Clocks
+- Generated project
+- Results: R plot
 
 #### Profiling:
 "Profilers Are Lying Hobbits (and we hate them!)" https://www.infoq.com/presentations/profilers-hotspots-bottlenecks
