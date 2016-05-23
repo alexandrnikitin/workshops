@@ -98,14 +98,29 @@ How does it work: https://github.com/PerfDotNet/BenchmarkDotNet#how-it-works
 
 #### Profiling:
 "Profilers Are Lying Hobbits (and we hate them!)" https://www.infoq.com/presentations/profilers-hotspots-bottlenecks
-Perfview
+
+Sandbox console app
+
+
+##### Perfview
+Swiss army knife
+Tutorial
+Time based
+Memory
+ETW events
+
 
 #### IL & Assembly code:
 ildasm & ILSpy
+
+Visual Studio
+
 Windbg - the great and powerful
 SOS Sun of Strike
 SOSex
 HOWTO: Debugging .NET with WinDbg https://docs.google.com/document/d/1yMQ8NAQZEBtsfVp7AsFLSA_MkIKlYNuSowG72_nU0ek
+
+CLRMD https://github.com/Microsoft/clrmd/blob/master/Documentation/MachineCode.md
 
 TODO: https://github.com/snare/voltron
 
