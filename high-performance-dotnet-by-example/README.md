@@ -105,6 +105,7 @@ Sandbox console app
 ##### Perfview
 Swiss army knife
 Tutorial
+Videos https://channel9.msdn.com/Series/PerfView-Tutorial
 Time based
 Memory
 ETW events
@@ -120,6 +121,7 @@ SOS Sun of Strike
 SOSex
 HOWTO: Debugging .NET with WinDbg https://docs.google.com/document/d/1yMQ8NAQZEBtsfVp7AsFLSA_MkIKlYNuSowG72_nU0ek
 
+WinDbgCs https://github.com/southpolenator/WinDbgCs
 CLRMD https://github.com/Microsoft/clrmd/blob/master/Documentation/MachineCode.md
 
 TODO: https://github.com/snare/voltron
