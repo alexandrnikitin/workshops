@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adform.AdServing.AhoCorasic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adform.AdServing.AhoCorasickTree.Sandbox", "Adform.AdServing.AhoCorasickTree.Sandbox\Adform.AdServing.AhoCorasickTree.Sandbox.csproj", "{C914AE3A-97A4-4C58-BCF5-838304A0D839}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adform.AdServing.AhoCorasickTree.SandboxApp", "Adform.AdServing.AhoCorasickTree.SandboxApp\Adform.AdServing.AhoCorasickTree.SandboxApp.csproj", "{FDB7DCDD-3589-4445-977F-8B19E7955CCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C914AE3A-97A4-4C58-BCF5-838304A0D839}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C914AE3A-97A4-4C58-BCF5-838304A0D839}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C914AE3A-97A4-4C58-BCF5-838304A0D839}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDB7DCDD-3589-4445-977F-8B19E7955CCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDB7DCDD-3589-4445-977F-8B19E7955CCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDB7DCDD-3589-4445-977F-8B19E7955CCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDB7DCDD-3589-4445-977F-8B19E7955CCB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
