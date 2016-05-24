@@ -131,7 +131,7 @@ TODO: https://github.com/snare/voltron
 ### Optimizations:
 #### Lesson 1: Know APIs of libraries you use!
 
-#### Know BCL collections and data structures
+#### Lesson 2: Know BCL collections and data structures
 
 #### Know advanced data structures
 

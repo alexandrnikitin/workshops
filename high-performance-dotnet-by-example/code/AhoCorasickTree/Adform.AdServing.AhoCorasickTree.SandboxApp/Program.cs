@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using AhoCorasickTreeV2 = Adform.AdServing.AhoCorasickTree.Sandbox.V2.AhoCorasickTree;
+using AhoCorasickTreeV3 = Adform.AdServing.AhoCorasickTree.Sandbox.V3.AhoCorasickTree;
 
 namespace Adform.AdServing.AhoCorasickTree.SandboxApp
 {
@@ -12,7 +12,7 @@ namespace Adform.AdServing.AhoCorasickTree.SandboxApp
     {
         static void Main(string[] args)
         {
-            var tree = new AhoCorasickTreeV2(new[] { "ab", "abc", "bcd" });
+            var tree = new AhoCorasickTreeV3(new[] { "ab", "abc", "bcd" });
 
 
             for (var i = 0; i < 30000000; i++)
