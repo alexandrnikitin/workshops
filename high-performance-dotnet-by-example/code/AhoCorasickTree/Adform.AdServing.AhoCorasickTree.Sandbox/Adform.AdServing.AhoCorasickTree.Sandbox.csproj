@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5925751E-C16C-439A-B4FA-9C3DF552A7C4}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{C914AE3A-97A4-4C58-BCF5-838304A0D839}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Adform.AdServing.AhoCorasickTree.Benchmarks</RootNamespace>
-    <AssemblyName>Adform.AdServing.AhoCorasickTree.Benchmarks</AssemblyName>
+    <RootNamespace>Adform.AdServing.AhoCorasickTree.Sandbox</RootNamespace>
+    <AssemblyName>Adform.AdServing.AhoCorasickTree.Sandbox</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,13 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BenchmarkDotNet, Version=0.9.6.0, Culture=neutral, PublicKeyToken=aa0ca2f9092cefc4, processorArchitecture=MSIL">
-      <HintPath>..\packages\BenchmarkDotNet.0.9.6\lib\net45\BenchmarkDotNet.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,19 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyBenchmark.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="V2\AhoCorasickTree.cs" />
+    <Compile Include="V2\AhoCorasickTreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Adform.AdServing.AhoCorasickTree.Sandbox\Adform.AdServing.AhoCorasickTree.Sandbox.csproj">
-      <Project>{c914ae3a-97a4-4c58-bcf5-838304a0d839}</Project>
-      <Name>Adform.AdServing.AhoCorasickTree.Sandbox</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Adform.AdServing.AhoCorasickTree\Adform.AdServing.AhoCorasickTree.csproj">
       <Project>{9a57938b-f515-43fa-9364-9e1e7e680f7d}</Project>
       <Name>Adform.AdServing.AhoCorasickTree</Name>
