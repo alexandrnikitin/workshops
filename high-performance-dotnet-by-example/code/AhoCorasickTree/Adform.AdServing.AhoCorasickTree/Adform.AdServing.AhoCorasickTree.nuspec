@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Adform.AdServing.AhoCorasickTree</id>
+    <version>1.0.0</version>
+    <authors>AdServing</authors>
+    <description>Adform.AdServing.AhoCorasickTree</description>
+  </metadata>
+  <files>
+    <file src="bin\Release\Adform.AdServing.AhoCorasickTree.dll" target="lib\net45" />
+  </files>
+</package>
