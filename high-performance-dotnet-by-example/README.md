@@ -154,6 +154,7 @@ BCL is too generic and isn't suitable for high performance
 Intel VTune Amplifier - heavy metal of profilers
 
 CPU cache miss
+Classic hashset -> open address hashset
 
 
 

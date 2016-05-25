@@ -19,7 +19,6 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V5
         public IEnumerable<AhoCorasickTreeNode> Transitions { get { return _entries.Where(x => x.Key != 0).Select(x => x.Value); } }
 
 
-        private int[] _buckets;
         private Entry[] _entries;
         private int _count;
 
@@ -35,7 +34,6 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V5
 
             _results = new List<string>();
 
-            _buckets = new int[0];
             _entries = new Entry[0];
         }
 
@@ -57,34 +55,37 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V5
 
         public AhoCorasickTreeNode AddTransition(char c)
         {
-            if (_count == _buckets.Length) Resize();
-
+            if (_count == _entries.Length) Resize();
             var node = new AhoCorasickTreeNode(this, c);
-            var bucket = c % _buckets.Length;
-            _entries[_count].Key = c;
-            _entries[_count].Value = node;
-            _entries[_count].Next = _buckets[bucket];
-            _buckets[bucket] = _count;
-            _count++;
 
-            return node;
+            while (true)
+            {
+                var ind = c%_entries.Length;
+                if (_entries[ind].Key == 0)
+                {
+                    _entries[ind].Key = c;
+                    _entries[ind].Value = node;
+                    _count++;
+                    return node;
+                }
+
+                ind++;
+                if (ind == _entries.Length) Resize();
+            }
         }
 
         public AhoCorasickTreeNode GetTransition(char c)
         {
             if (_count == 0) return null;
 
-            var bucket = c % _buckets.Length;
-
-            for (int i = _buckets[bucket]; i >= 0; i = _entries[i].Next)
+            var ind = c%_entries.Length;
+            while (true)
             {
-                if (_entries[i].Key == c)
-                {
-                    return _entries[i].Value;
-                }
+                if (_entries[ind].Key == c) return _entries[ind].Value;
+                if (_entries[ind].Key == 0) return null;
+                ind++;
+                if (ind == _entries.Length) return null;
             }
-
-            return null;
         }
 
         public bool ContainsTransition(char c)
@@ -95,38 +96,39 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V5
 
         private void Resize()
         {
-            var size = _buckets.Length;
-            var newSize = size == 0 ? 1 : size * 2;
+            var newSize = _entries.Length;
 
-            var newBuckets = new int[newSize];
-            for (int i = 0; i < newSize; i++)
-            {
-                newBuckets[i] = -1;
-            }
+            reresize:
+            newSize = newSize == 0 ? 1 : newSize*2;
 
             var newEntries = new Entry[newSize];
 
-            
-            Array.Copy(_entries, 0, newEntries, 0, size);
-
-            for (int i = 0; i < size; i++)
+            foreach (var entry in _entries)
             {
-                var bucket = newEntries[i].Key % newSize;
-                newEntries[i].Next = newBuckets[bucket];
-                newBuckets[bucket] = i;
+                var key = entry.Key;
+                var value = entry.Value;
+                var ind = key%newSize;
+
+                while (newEntries[ind].Key != 0)
+                {
+                    ind++;
+                    if (ind == _entries.Length)
+                    {
+                        goto reresize;
+                    }
+                }
+
+                newEntries[ind].Key = key;
+                newEntries[ind].Value = value;
             }
 
-            _buckets = newBuckets;
             _entries = newEntries;
-
         }
-
     }
 
     internal struct Entry
     {
         public char Key;
         public AhoCorasickTreeNode Value;
-        public int Next;
     }
 }
