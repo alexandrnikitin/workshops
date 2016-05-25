@@ -20,7 +20,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V5
 
 
         private Entry[] _entries;
-        private int _count;
+        private int _size;
 
 
         public AhoCorasickTreeNode() : this(null, ' ')
@@ -55,37 +55,39 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V5
 
         public AhoCorasickTreeNode AddTransition(char c)
         {
-            if (_count == _entries.Length) Resize();
             var node = new AhoCorasickTreeNode(this, c);
+
+            if (_size == 0) Resize();
 
             while (true)
             {
-                var ind = c%_entries.Length;
-                if (_entries[ind].Key == 0)
+                var ind = c % _size;
+
+                if (_entries[ind].Key != 0 && _entries[ind].Key != c)
                 {
-                    _entries[ind].Key = c;
-                    _entries[ind].Value = node;
-                    _count++;
-                    return node;
+                    Resize();
+                    continue;
                 }
 
-                ind++;
-                if (ind == _entries.Length) Resize();
+                _entries[ind].Key = c;
+                _entries[ind].Value = node;
+                return node;
             }
         }
 
         public AhoCorasickTreeNode GetTransition(char c)
         {
-            if (_count == 0) return null;
+            if (_size == 0) return null;
 
-            var ind = c%_entries.Length;
-            while (true)
+            var ind = c % _size;
+            var keyThere = _entries[ind].Key;
+            var value = _entries[ind].Value;
+            if (keyThere != 0 && (keyThere == c))
             {
-                if (_entries[ind].Key == c) return _entries[ind].Value;
-                if (_entries[ind].Key == 0) return null;
-                ind++;
-                if (ind == _entries.Length) return null;
+                return value;
             }
+
+            return null;
         }
 
         public bool ContainsTransition(char c)
@@ -96,34 +98,33 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V5
 
         private void Resize()
         {
-            var newSize = _entries.Length;
+            var newSize = _entries.Length * 2;
+            if (newSize == 0) newSize = 1;
+            Resize(newSize);
+        }
 
-            reresize:
-            newSize = newSize == 0 ? 1 : newSize*2;
-
+        private void Resize(int newSize)
+        {
             var newEntries = new Entry[newSize];
-
-            foreach (var entry in _entries)
+            for (var i = 0; i < _entries.Length; i++)
             {
-                var key = entry.Key;
-                var value = entry.Value;
-                var ind = key%newSize;
+                var key = _entries[i].Key;
+                var value = _entries[i].Value;
+                var ind = key % newSize;
 
-                while (newEntries[ind].Key != 0)
+                if (newEntries[ind].Key != 0 && newEntries[ind].Key != key)
                 {
-                    ind++;
-                    if (ind == _entries.Length)
-                    {
-                        goto reresize;
-                    }
+                    Resize(newSize * 2);
+                    return;
                 }
-
                 newEntries[ind].Key = key;
                 newEntries[ind].Value = value;
             }
-
             _entries = newEntries;
+            _size = newSize;
+
         }
+
     }
 
     internal struct Entry
