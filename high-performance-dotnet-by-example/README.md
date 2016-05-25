@@ -159,9 +159,20 @@ Classic hashset -> open address hashset
 
 
 CPU cache:
-L3 hit ~40 cycles
-L3 miss, memory read ~200 cycles
 
+Intel i7-4770 (Haswell), 3.4 GHz
+
+L1 Data cache = 32 KB
+L1 Instruction cache = 32 KB
+L2 cache = 256 KB
+L3 cache = 8 MB
+L1 Data Cache Latency = 4 cycles for simple access via pointer
+L1 Data Cache Latency = 5 cycles for access with complex address calculation
+L2 Cache Latency = 12 cycles
+L3 Cache Latency = 36 cycles
+RAM Latency = 36 cycles + 57 ns
+
+Source: http://www.7-cpu.com/cpu/Haswell.html
 
 
 ### Experiments
