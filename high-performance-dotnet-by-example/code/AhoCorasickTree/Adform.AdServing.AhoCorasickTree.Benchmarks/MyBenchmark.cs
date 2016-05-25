@@ -3,6 +3,7 @@ using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnostics.Windows;
 using BenchmarkDotNet.Jobs;
 using AhoCorasickTreeV2 = Adform.AdServing.AhoCorasickTree.Sandbox.V2.AhoCorasickTree;
+using AhoCorasickTreeV2a = Adform.AdServing.AhoCorasickTree.Sandbox.V2a.AhoCorasickTree;
 using AhoCorasickTreeV3 = Adform.AdServing.AhoCorasickTree.Sandbox.V3.AhoCorasickTree;
 
 namespace Adform.AdServing.AhoCorasickTree.Benchmarks
@@ -12,12 +13,14 @@ namespace Adform.AdServing.AhoCorasickTree.Benchmarks
     {
         private readonly AhoCorasickTree _tree;
         private readonly AhoCorasickTreeV2 _tree2;
+        private readonly AhoCorasickTreeV2a _tree2a;
         private readonly AhoCorasickTreeV3 _tree3;
 
         public MyBenchmark()
         {
             _tree = new AhoCorasickTree(new[] {"ab", "abc", "bcd"});
             _tree2 = new AhoCorasickTreeV2(new[] {"ab", "abc", "bcd"});
+            _tree2a = new AhoCorasickTreeV2a(new[] {"ab", "abc", "bcd"});
             _tree3 = new AhoCorasickTreeV3(new[] {"ab", "abc", "bcd"});
         }
 
@@ -31,6 +34,12 @@ namespace Adform.AdServing.AhoCorasickTree.Benchmarks
         public bool Test2()
         {
             return _tree2.Contains("ab");
+        }
+
+        [Benchmark]
+        public bool Test2a()
+        {
+            return _tree2a.Contains("ab");
         }
 
         [Benchmark]

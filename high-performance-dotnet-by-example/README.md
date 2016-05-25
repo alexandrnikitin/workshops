@@ -135,11 +135,17 @@ TODO: https://github.com/snare/voltron
 ### Optimizations:
 #### Lesson 1: Know APIs of libraries you use!
 
+
 #### Lesson 2: Know BCL collections and data structures
 GC modes: Server vs Workstation (BenchmarkDotNet?) CPU groups?
 Try Server GC: less GCs
 
 Profilers are lying hobbits!!!
+Everybody lies!!
+
+box struct task?
+
+
 
 #### Know advanced data structures
 
