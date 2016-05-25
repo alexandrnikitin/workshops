@@ -96,6 +96,10 @@ How does it work: https://github.com/PerfDotNet/BenchmarkDotNet#how-it-works
 - Generated project
 - Results: R plot
 
+Tasks:
+x86 vs x64
+RuyJIT vs LegacyJit
+
 #### Profiling:
 "Profilers Are Lying Hobbits (and we hate them!)" https://www.infoq.com/presentations/profilers-hotspots-bottlenecks
 
@@ -109,7 +113,7 @@ Videos https://channel9.msdn.com/Series/PerfView-Tutorial
 Time based
 Memory
 ETW events
-
+CMD args: https://github.com/lowleveldesign/debug-recipes/blob/master/perfview/perfview-cmdline.txt
 
 #### IL & Assembly code:
 ildasm & ILSpy
@@ -134,6 +138,8 @@ TODO: https://github.com/snare/voltron
 #### Lesson 2: Know BCL collections and data structures
 GC modes: Server vs Workstation (BenchmarkDotNet?) CPU groups?
 Try Server GC: less GCs
+
+Profilers are lying hobbits!!!
 
 #### Know advanced data structures
 
