@@ -146,6 +146,9 @@ Everybody lies!!
 box struct task?
 
 
+#### Lesson 3: Know basic data structures
+BCL is too generic and isn't suitable for high performance
+
 
 #### Know advanced data structures
 

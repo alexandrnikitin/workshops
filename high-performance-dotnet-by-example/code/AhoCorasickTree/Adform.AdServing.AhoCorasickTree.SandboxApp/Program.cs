@@ -1,4 +1,4 @@
-﻿using AhoCorasickTreeV3a = Adform.AdServing.AhoCorasickTree.Sandbox.V3a.AhoCorasickTree;
+﻿using AhoCorasickTreeV4 = Adform.AdServing.AhoCorasickTree.Sandbox.V4.AhoCorasickTree;
 
 namespace Adform.AdServing.AhoCorasickTree.SandboxApp
 {
@@ -6,10 +6,10 @@ namespace Adform.AdServing.AhoCorasickTree.SandboxApp
     {
         static void Main(string[] args)
         {
-            var tree = new AhoCorasickTreeV3a(new[] {"ab", "abc", "bcd"});
+            var tree = new AhoCorasickTreeV4(new[] {"ab", "abc", "bcd"});
 
 
-            for (var i = 0; i < 30000000; i++)
+            for (var i = 0; i < 300000000; i++)
             {
                 tree.Contains("bcd");
             }
