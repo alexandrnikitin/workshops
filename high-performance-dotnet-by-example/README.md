@@ -151,6 +151,11 @@ BCL is too generic and isn't suitable for high performance
 
 
 #### Know advanced data structures
+Intel VTune Amplifier - heavy metal of profilers
+
+CPU cache miss
+
+
 
 CPU cache:
 L3 hit ~40 cycles
