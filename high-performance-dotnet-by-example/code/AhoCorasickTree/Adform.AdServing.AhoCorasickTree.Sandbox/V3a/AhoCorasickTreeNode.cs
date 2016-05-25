@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Adform.AdServing.AhoCorasickTree.Sandbox.V2a
+namespace Adform.AdServing.AhoCorasickTree.Sandbox.V3a
 {
     [DebuggerDisplay("Value = {Value}, TransitionCount = {_transitionsDictionary.Count}")]
     internal class AhoCorasickTreeNode
@@ -13,7 +13,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V2a
         private readonly Dictionary<char, AhoCorasickTreeNode> _transitionsDictionary;
         private readonly AhoCorasickTreeNode _parent;
 
-        public IEnumerable<string> Results { get { return _results; } }
+        public List<string> Results { get { return _results; } }
         public AhoCorasickTreeNode ParentFailure { get { return _parent == null ? null : _parent.Failure; } }
         public IEnumerable<AhoCorasickTreeNode> Transitions { get { return _transitionsDictionary.Values; } }
 

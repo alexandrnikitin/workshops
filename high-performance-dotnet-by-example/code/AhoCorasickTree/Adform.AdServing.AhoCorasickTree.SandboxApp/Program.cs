@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using AhoCorasickTreeV3 = Adform.AdServing.AhoCorasickTree.Sandbox.V3.AhoCorasickTree;
+﻿using AhoCorasickTreeV3a = Adform.AdServing.AhoCorasickTree.Sandbox.V3a.AhoCorasickTree;
 
 namespace Adform.AdServing.AhoCorasickTree.SandboxApp
 {
@@ -12,14 +6,13 @@ namespace Adform.AdServing.AhoCorasickTree.SandboxApp
     {
         static void Main(string[] args)
         {
-            var tree = new AhoCorasickTreeV3(new[] { "ab", "abc", "bcd" });
+            var tree = new AhoCorasickTreeV3a(new[] {"ab", "abc", "bcd"});
 
 
             for (var i = 0; i < 30000000; i++)
             {
                 tree.Contains("bcd");
             }
-
         }
     }
 }

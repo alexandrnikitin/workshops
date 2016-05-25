@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 
-namespace Adform.AdServing.AhoCorasickTree.Sandbox.V2a
+namespace Adform.AdServing.AhoCorasickTree.Sandbox.V3a
 {
     public class AhoCorasickTree
     {
@@ -45,7 +44,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V2a
                 else if (onlyStarts)
                     return false;
 
-                if (pointer.Results.GetEnumerator().MoveNext())
+                if (pointer.Results.Count > 0)
                     return true;
             }
             return false;

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Adform.AdServing.AhoCorasickTree.Sandbox.V3
 {
@@ -45,7 +44,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V3
                 else if (onlyStarts)
                     return false;
 
-                if (pointer.Results.Count > 0)
+                if (pointer.Results.GetEnumerator().MoveNext())
                     return true;
             }
             return false;
