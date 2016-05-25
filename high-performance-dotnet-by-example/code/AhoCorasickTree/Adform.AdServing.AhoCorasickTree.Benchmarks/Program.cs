@@ -11,7 +11,7 @@ namespace Adform.AdServing.AhoCorasickTree.Benchmarks
     {
         static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<MyBenchmark>();
+            var summary = BenchmarkRunner.Run<ManyKeywordsBenchmark>();
         }
     }
 }
