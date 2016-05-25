@@ -16,7 +16,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4
 
         public List<string> Results { get { return _results; } }
         public AhoCorasickTreeNode ParentFailure { get { return _parent == null ? null : _parent.Failure; } }
-        public IEnumerable<AhoCorasickTreeNode> Transitions { get { return _entries.Select(x => x.Value); } }
+        public IEnumerable<AhoCorasickTreeNode> Transitions { get { return _entries.Where(x => x.Key != 0).Select(x => x.Value); } }
 
 
         private int[] _buckets;
@@ -64,7 +64,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4
             _entries[_count].Key = c;
             _entries[_count].Value = node;
             _entries[_count].Next = _buckets[bucket];
-            _buckets[bucket] = bucket;
+            _buckets[bucket] = _count;
             _count++;
 
             return node;
