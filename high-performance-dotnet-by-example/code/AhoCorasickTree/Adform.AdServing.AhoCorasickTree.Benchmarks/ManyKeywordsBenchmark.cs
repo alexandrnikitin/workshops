@@ -7,6 +7,7 @@ using AhoCorasickTreeV2 = Adform.AdServing.AhoCorasickTree.Sandbox.V2.AhoCorasic
 using AhoCorasickTreeV3 = Adform.AdServing.AhoCorasickTree.Sandbox.V3.AhoCorasickTree;
 using AhoCorasickTreeV3a = Adform.AdServing.AhoCorasickTree.Sandbox.V3a.AhoCorasickTree;
 using AhoCorasickTreeV4 = Adform.AdServing.AhoCorasickTree.Sandbox.V4.AhoCorasickTree;
+using AhoCorasickTreeV4a = Adform.AdServing.AhoCorasickTree.Sandbox.V4a.AhoCorasickTree;
 using AhoCorasickTreeV5 = Adform.AdServing.AhoCorasickTree.Sandbox.V5.AhoCorasickTree;
 
 namespace Adform.AdServing.AhoCorasickTree.Benchmarks
@@ -20,6 +21,7 @@ namespace Adform.AdServing.AhoCorasickTree.Benchmarks
         private readonly AhoCorasickTreeV3 _tree2a;
         private readonly AhoCorasickTreeV3a _tree3;
         private readonly AhoCorasickTreeV4 _tree4;
+        private readonly AhoCorasickTreeV4a _tree4a;
         private readonly AhoCorasickTreeV5 _tree5;
 
         public ManyKeywordsBenchmark()
@@ -31,6 +33,7 @@ namespace Adform.AdServing.AhoCorasickTree.Benchmarks
             _tree2a = new AhoCorasickTreeV3(keywords);
             _tree3 = new AhoCorasickTreeV3a(keywords);
             _tree4 = new AhoCorasickTreeV4(keywords);
+            _tree4a = new AhoCorasickTreeV4a(keywords);
             _tree5 = new AhoCorasickTreeV5(keywords);
         }
 
@@ -62,6 +65,12 @@ namespace Adform.AdServing.AhoCorasickTree.Benchmarks
         public bool Test4()
         {
             return _tree4.Contains(UserAgent);
+        }
+
+        [Benchmark]
+        public bool Test4a()
+        {
+            return _tree4a.Contains(UserAgent);
         }
 
         [Benchmark]

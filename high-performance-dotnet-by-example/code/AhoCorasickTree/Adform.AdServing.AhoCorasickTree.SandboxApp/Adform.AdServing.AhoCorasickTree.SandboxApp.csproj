@@ -51,6 +51,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Adform.AdServing.AhoCorasickTree.Benchmarks\Adform.AdServing.AhoCorasickTree.Benchmarks.csproj">
+      <Project>{5925751e-c16c-439a-b4fa-9c3df552a7c4}</Project>
+      <Name>Adform.AdServing.AhoCorasickTree.Benchmarks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Adform.AdServing.AhoCorasickTree.Sandbox\Adform.AdServing.AhoCorasickTree.Sandbox.csproj">
       <Project>{c914ae3a-97a4-4c58-bcf5-838304a0d839}</Project>
       <Name>Adform.AdServing.AhoCorasickTree.Sandbox</Name>
