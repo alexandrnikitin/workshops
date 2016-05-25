@@ -23,7 +23,37 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
 
         public bool Contains(string text)
         {
-            return Contains(text, false);
+            var currentNode = Root;
+
+            var length = text.Length;
+            for (var i = 0; i < length; i++)
+            {
+                while (true)
+                {
+                    var node = currentNode.GetTransition(text[i]);
+                    if (node == null)
+                    {
+                        currentNode = currentNode.Failure;
+                        if (currentNode == Root)
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (node.Results.Count > 0)
+                        {
+                            return true;
+                        }
+
+                        currentNode = node;
+                        break;
+                    }
+                }
+            }
+
+            return false;
+
         }
 
         public bool ContainsThatStart(string text)
