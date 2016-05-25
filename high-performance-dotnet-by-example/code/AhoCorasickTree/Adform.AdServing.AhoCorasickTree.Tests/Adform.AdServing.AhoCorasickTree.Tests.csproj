@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Adform.AdServing.AhoCorasickTree.Tests</RootNamespace>
     <AssemblyName>Adform.AdServing.AhoCorasickTree.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,6 +53,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Adform.AdServing.AhoCorasickTree.Sandbox\Adform.AdServing.AhoCorasickTree.Sandbox.csproj">
+      <Project>{c914ae3a-97a4-4c58-bcf5-838304a0d839}</Project>
+      <Name>Adform.AdServing.AhoCorasickTree.Sandbox</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Adform.AdServing.AhoCorasickTree\Adform.AdServing.AhoCorasickTree.csproj">
       <Project>{9a57938b-f515-43fa-9364-9e1e7e680f7d}</Project>
       <Name>Adform.AdServing.AhoCorasickTree</Name>
