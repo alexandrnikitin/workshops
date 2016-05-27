@@ -152,10 +152,13 @@ box struct task?
 BCL is too generic and isn't suitable for high performance
 
 
-####
+#### Lesson 4: Know overheads
 
 Basic hotspots
 Memory access
+
+Memory writes:
+By Ref
 
 Memory reads
 ```
@@ -169,24 +172,10 @@ jle 0x7ffcbc4238a1
 ```
 
 
-
+#### Lesson 4: Know how CPU works
 
 CPU: Front-End & Back-End
-
-
-FLOPs per cycle: http://stackoverflow.com/questions/8389648/how-do-i-achieve-the-theoretical-maximum-of-4-flops-per-cycle
-Branch prediction
-
-
-#### Know advanced data structures
-Intel VTune Amplifier - heavy metal of profilers
-
-CPU cache miss
-Classic hashset -> open address hashset
-
-
-
-CPU cache:
+CPU cache
 
 Intel i7-4770 (Haswell), 3.4 GHz
 
@@ -204,6 +193,20 @@ L3 Cache Latency = 36 cycles
 RAM Latency = 36 cycles + 57 ns
 
 Source: http://www.7-cpu.com/cpu/Haswell.html
+
+
+FLOPs per cycle: http://stackoverflow.com/questions/8389648/how-do-i-achieve-the-theoretical-maximum-of-4-flops-per-cycle
+Branch prediction
+
+
+#### Know advanced data structures
+Intel VTune Amplifier - heavy metal of profilers
+
+
+Classic hashset -> open address hashset
+
+
+
 
 
 ### Experiments
