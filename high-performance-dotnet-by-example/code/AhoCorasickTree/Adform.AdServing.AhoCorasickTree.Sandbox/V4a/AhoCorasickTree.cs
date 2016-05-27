@@ -25,8 +25,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
         {
             var currentNode = Root;
 
-            var length = text.Length;
-            for (var i = 0; i < length; i++)
+            for (var i = 0; i < text.Length; i++)
             {
                 while (true)
                 {
@@ -41,7 +40,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
                     }
                     else
                     {
-                        if (node.Results.Count > 0)
+                        if (node.IsWord)
                         {
                             return true;
                         }

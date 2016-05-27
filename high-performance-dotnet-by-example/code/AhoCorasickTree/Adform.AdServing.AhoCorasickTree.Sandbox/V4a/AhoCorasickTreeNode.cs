@@ -11,6 +11,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
         public char Value { get; private set; }
         public AhoCorasickTreeNode Failure { get; set; }
 
+        public bool IsWord;
         private readonly List<string> _results;
         private readonly AhoCorasickTreeNode _parent;
 
