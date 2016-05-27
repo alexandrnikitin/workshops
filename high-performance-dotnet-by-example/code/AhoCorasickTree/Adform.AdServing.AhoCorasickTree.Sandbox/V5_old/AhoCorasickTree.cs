@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
+namespace Adform.AdServing.AhoCorasickTree.Sandbox.V5_old
 {
     public class AhoCorasickTree
     {
@@ -23,36 +23,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
 
         public bool Contains(string text)
         {
-            var currentNode = Root;
-
-            for (var i = 0; i < text.Length; i++)
-            {
-                while (true)
-                {
-                    var node = currentNode.GetTransition(text[i]);
-                    if (node == null)
-                    {
-                        currentNode = currentNode.Failure;
-                        if (currentNode == Root)
-                        {
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (node.IsWord)
-                        {
-                            return true;
-                        }
-
-                        currentNode = node;
-                        break;
-                    }
-                }
-            }
-
-            return false;
-
+            return Contains(text, false);
         }
 
         public bool ContainsThatStart(string text)
@@ -64,19 +35,9 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
         {
             var pointer = Root;
 
-            for (var i = 0; i < text.Length; i++)
+            foreach (var c in text)
             {
-                AhoCorasickTreeNode transition = null;
-                while (transition == null)
-                {
-                    transition = pointer.GetTransition(text[i]);
-
-                    if (pointer == Root)
-                        break;
-
-                    if (transition == null)
-                        pointer = pointer.Failure;
-                }
+                var transition = GetTransition(c, ref pointer);
 
                 if (transition != null)
                     pointer = transition;

@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
+namespace Adform.AdServing.AhoCorasickTree.Sandbox.V5_old
 {
     [DebuggerDisplay("Value = {Value}, TransitionCount = {_transitionsDictionary.Count}")]
     internal class AhoCorasickTreeNode
@@ -11,7 +10,6 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
         public char Value { get; private set; }
         public AhoCorasickTreeNode Failure { get; set; }
 
-        public bool IsWord;
         private readonly List<string> _results;
         private readonly AhoCorasickTreeNode _parent;
 
@@ -20,9 +18,8 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
         public IEnumerable<AhoCorasickTreeNode> Transitions { get { return _entries.Where(x => x.Key != 0).Select(x => x.Value); } }
 
 
-        private int[] _buckets;
         private Entry[] _entries;
-        private int _count;
+        private int _size;
 
 
         public AhoCorasickTreeNode() : this(null, ' ')
@@ -36,7 +33,6 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
 
             _results = new List<string>();
 
-            _buckets = new int[0];
             _entries = new Entry[0];
         }
 
@@ -46,8 +42,6 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
             {
                 _results.Add(result);
             }
-
-            IsWord = true;
         }
 
         public void AddResults(IEnumerable<string> results)
@@ -56,37 +50,40 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
             {
                 AddResult(result);
             }
-
-            IsWord = true;
         }
 
         public AhoCorasickTreeNode AddTransition(char c)
         {
-            if (_count == _buckets.Length) Resize();
-
             var node = new AhoCorasickTreeNode(this, c);
-            var bucket = c % _buckets.Length;
-            _entries[_count].Key = c;
-            _entries[_count].Value = node;
-            _entries[_count].Next = _buckets[bucket];
-            _buckets[bucket] = _count;
-            _count++;
 
-            return node;
+            if (_size == 0) Resize();
+
+            while (true)
+            {
+                var ind = c % _size;
+
+                if (_entries[ind].Key != 0 && _entries[ind].Key != c)
+                {
+                    Resize();
+                    continue;
+                }
+
+                _entries[ind].Key = c;
+                _entries[ind].Value = node;
+                return node;
+            }
         }
 
         public AhoCorasickTreeNode GetTransition(char c)
         {
-            if (_count == 0) return null;
+            if (_size == 0) return null;
 
-            var bucket = c % _buckets.Length;
-
-            for (int i = _buckets[bucket]; i >= 0; i = _entries[i].Next)
+            var ind = c % _size;
+            var keyThere = _entries[ind].Key;
+            var value = _entries[ind].Value;
+            if (keyThere != 0 && (keyThere == c))
             {
-                if (_entries[i].Key == c)
-                {
-                    return _entries[i].Value;
-                }
+                return value;
             }
 
             return null;
@@ -100,29 +97,30 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
 
         private void Resize()
         {
-            var size = _buckets.Length;
-            var newSize = size == 0 ? 1 : size * 2;
+            var newSize = _entries.Length * 2;
+            if (newSize == 0) newSize = 1;
+            Resize(newSize);
+        }
 
-            var newBuckets = new int[newSize];
-            for (int i = 0; i < newSize; i++)
-            {
-                newBuckets[i] = -1;
-            }
-
+        private void Resize(int newSize)
+        {
             var newEntries = new Entry[newSize];
-
-            
-            Array.Copy(_entries, 0, newEntries, 0, size);
-
-            for (int i = 0; i < size; i++)
+            for (var i = 0; i < _entries.Length; i++)
             {
-                var bucket = newEntries[i].Key % newSize;
-                newEntries[i].Next = newBuckets[bucket];
-                newBuckets[bucket] = i;
-            }
+                var key = _entries[i].Key;
+                var value = _entries[i].Value;
+                var ind = key % newSize;
 
-            _buckets = newBuckets;
+                if (newEntries[ind].Key != 0 && newEntries[ind].Key != key)
+                {
+                    Resize(newSize * 2);
+                    return;
+                }
+                newEntries[ind].Key = key;
+                newEntries[ind].Value = value;
+            }
             _entries = newEntries;
+            _size = newSize;
 
         }
 
@@ -132,6 +130,5 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
     {
         public char Key;
         public AhoCorasickTreeNode Value;
-        public int Next;
     }
 }

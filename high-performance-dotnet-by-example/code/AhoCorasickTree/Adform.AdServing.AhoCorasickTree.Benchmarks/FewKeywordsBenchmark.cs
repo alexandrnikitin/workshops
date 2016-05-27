@@ -6,7 +6,7 @@ using AhoCorasickTreeV3 = Adform.AdServing.AhoCorasickTree.Sandbox.V3.AhoCorasic
 using AhoCorasickTreeV3a = Adform.AdServing.AhoCorasickTree.Sandbox.V3a.AhoCorasickTree;
 using AhoCorasickTreeV4 = Adform.AdServing.AhoCorasickTree.Sandbox.V4.AhoCorasickTree;
 using AhoCorasickTreeV4a = Adform.AdServing.AhoCorasickTree.Sandbox.V4a.AhoCorasickTree;
-using AhoCorasickTreeV5 = Adform.AdServing.AhoCorasickTree.Sandbox.V5.AhoCorasickTree;
+using AhoCorasickTreeV5 = Adform.AdServing.AhoCorasickTree.Sandbox.V5_old.AhoCorasickTree;
 
 namespace Adform.AdServing.AhoCorasickTree.Benchmarks
 {
