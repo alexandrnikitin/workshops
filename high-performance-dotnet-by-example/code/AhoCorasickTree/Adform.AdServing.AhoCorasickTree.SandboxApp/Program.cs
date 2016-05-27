@@ -4,7 +4,7 @@ using Adform.AdServing.AhoCorasickTree.Benchmarks.Utils;
 
 namespace Adform.AdServing.AhoCorasickTree.SandboxApp
 {
-    using AhoCorasickTree = Adform.AdServing.AhoCorasickTree.Sandbox.V7.AhoCorasickTree;
+    using AhoCorasickTree = Adform.AdServing.AhoCorasickTree.Sandbox.V8.AhoCorasickTree;
 
     class Program
     {
@@ -14,7 +14,7 @@ namespace Adform.AdServing.AhoCorasickTree.SandboxApp
         {
             var tree = new AhoCorasickTree(ResourcesUtils.GetKeywords());
 
-            for (var i = 0; i < 50000000; i++)
+            for (var i = 0; i < 100000000; i++)
             {
                 tree.Contains(UserAgent);
             }

@@ -25,11 +25,66 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V8
         {
             var currentNode = Root;
 
-            for (var i = 0; i < text.Length; i++)
+            for (var i = 0; i < text.Length; i = i + 4)
             {
                 while (true)
                 {
                     var node = currentNode.GetTransition(text[i]);
+                    if (node == null)
+                    {
+                        currentNode = currentNode.Failure;
+                        if (currentNode == Root)
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (node.IsWord)
+                        {
+                            return true;
+                        }
+
+                        currentNode = node;
+                    }
+
+                    node = currentNode.GetTransition(text[i+1]);
+                    if (node == null)
+                    {
+                        currentNode = currentNode.Failure;
+                        if (currentNode == Root)
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (node.IsWord)
+                        {
+                            return true;
+                        }
+
+                        currentNode = node;
+                    }
+                    node = currentNode.GetTransition(text[i+2]);
+                    if (node == null)
+                    {
+                        currentNode = currentNode.Failure;
+                        if (currentNode == Root)
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (node.IsWord)
+                        {
+                            return true;
+                        }
+
+                        currentNode = node;
+                    }
+                    node = currentNode.GetTransition(text[i+3]);
                     if (node == null)
                     {
                         currentNode = currentNode.Failure;
