@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
+namespace Adform.AdServing.AhoCorasickTree.Sandbox.V5
 {
     [DebuggerDisplay("Value = {Value}, TransitionCount = {_transitionsDictionary.Count}")]
     internal class AhoCorasickTreeNode

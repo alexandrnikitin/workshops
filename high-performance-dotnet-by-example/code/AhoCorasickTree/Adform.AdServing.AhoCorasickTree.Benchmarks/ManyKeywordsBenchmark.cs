@@ -7,8 +7,8 @@ using AhoCorasickTreeV2 = Adform.AdServing.AhoCorasickTree.Sandbox.V2.AhoCorasic
 using AhoCorasickTreeV3 = Adform.AdServing.AhoCorasickTree.Sandbox.V3.AhoCorasickTree;
 using AhoCorasickTreeV3a = Adform.AdServing.AhoCorasickTree.Sandbox.V3a.AhoCorasickTree;
 using AhoCorasickTreeV4 = Adform.AdServing.AhoCorasickTree.Sandbox.V4.AhoCorasickTree;
-using AhoCorasickTreeV4a = Adform.AdServing.AhoCorasickTree.Sandbox.V4a.AhoCorasickTree;
-using AhoCorasickTreeV5 = Adform.AdServing.AhoCorasickTree.Sandbox.V5_old.AhoCorasickTree;
+using AhoCorasickTreeV5 = Adform.AdServing.AhoCorasickTree.Sandbox.V5.AhoCorasickTree;
+using AhoCorasickTreeV6 = Adform.AdServing.AhoCorasickTree.Sandbox.V6.AhoCorasickTree;
 
 namespace Adform.AdServing.AhoCorasickTree.Benchmarks
 {
@@ -21,8 +21,8 @@ namespace Adform.AdServing.AhoCorasickTree.Benchmarks
         private readonly AhoCorasickTreeV3 _tree2a;
         private readonly AhoCorasickTreeV3a _tree3;
         private readonly AhoCorasickTreeV4 _tree4;
-        private readonly AhoCorasickTreeV4a _tree4a;
         private readonly AhoCorasickTreeV5 _tree5;
+        private readonly AhoCorasickTreeV6 _tree6;
 
         public ManyKeywordsBenchmark()
         {
@@ -33,8 +33,8 @@ namespace Adform.AdServing.AhoCorasickTree.Benchmarks
             _tree2a = new AhoCorasickTreeV3(keywords);
             _tree3 = new AhoCorasickTreeV3a(keywords);
             _tree4 = new AhoCorasickTreeV4(keywords);
-            _tree4a = new AhoCorasickTreeV4a(keywords);
             _tree5 = new AhoCorasickTreeV5(keywords);
+            _tree6 = new AhoCorasickTreeV6(keywords);
         }
 
         [Benchmark(Baseline = true)]
@@ -68,15 +68,15 @@ namespace Adform.AdServing.AhoCorasickTree.Benchmarks
         }
 
         [Benchmark]
-        public bool Test4a()
-        {
-            return _tree4a.Contains(UserAgent);
-        }
-
-        [Benchmark]
         public bool Test5()
         {
             return _tree5.Contains(UserAgent);
+        }
+
+        [Benchmark]
+        public bool Test6()
+        {
+            return _tree6.Contains(UserAgent);
         }
 
         private class Config : ManualConfig

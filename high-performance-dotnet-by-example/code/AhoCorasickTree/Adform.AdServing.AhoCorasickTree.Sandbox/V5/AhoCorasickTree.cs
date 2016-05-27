@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Adform.AdServing.AhoCorasickTree.Sandbox.V4a
+namespace Adform.AdServing.AhoCorasickTree.Sandbox.V5
 {
     public class AhoCorasickTree
     {
