@@ -65,7 +65,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V7
 
             while (true)
             {
-                var ind = c % _size;
+                var ind = c & (_size - 1);
 
                 if (_entries[ind].Key != 0 && _entries[ind].Key != c)
                 {
@@ -113,7 +113,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V7
             {
                 var key = _entries[i].Key;
                 var value = _entries[i].Value;
-                var ind = key % newSize;
+                var ind = key & (newSize- 1);
 
                 if (newEntries[ind].Key != 0 && newEntries[ind].Key != key)
                 {
