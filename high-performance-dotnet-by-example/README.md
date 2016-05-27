@@ -199,13 +199,19 @@ FLOPs per cycle: http://stackoverflow.com/questions/8389648/how-do-i-achieve-the
 Branch prediction
 
 
-#### Know advanced data structures
+#### Lesson 5: Know advanced data structures
 Intel VTune Amplifier - heavy metal of profilers
 
 
 Classic hashset -> open address hashset
 
+Memory exploration
 
+
+
+#### Lesson 6: Know hacks
+
+MOD is expensive
 
 
 
