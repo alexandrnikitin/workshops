@@ -14,7 +14,10 @@ namespace Adform.AdServing.AhoCorasickTree.Benchmarks.Utils
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             using (var reader = new StreamReader(stream))
             {
-                yield return reader.ReadLine();
+                while (!reader.EndOfStream)
+                {
+                    yield return reader.ReadLine();
+                }
             }
         }
     }
