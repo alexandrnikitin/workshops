@@ -29,9 +29,11 @@ We have a feature in Adform that identifies unwanted bot traffic. It’s backed 
 
 
 ### Prerequisites:
+- Study the Aho-Corasick algorithm and try to implement it by yourself
 - ildasm, ILSpy
-- WinDBG
+- WinDBG[optional]
 - PerfView
+- Intel VTune Amplifier [optional]
 
 What it isn't about:
 * .NET vs JVM vs C++
@@ -150,6 +152,32 @@ box struct task?
 BCL is too generic and isn't suitable for high performance
 
 
+####
+
+Basic hotspots
+Memory access
+
+Memory reads
+```
+if (pointer.Results.Count > 0)
+```
+```
+mov rax, qword ptr [rsp+0x28]
+mov rax, qword ptr [rax+0x10]
+cmp dword ptr [rax+0x18], 0x0
+jle 0x7ffcbc4238a1
+```
+
+
+
+
+CPU: Front-End & Back-End
+
+
+FLOPs per cycle: http://stackoverflow.com/questions/8389648/how-do-i-achieve-the-theoretical-maximum-of-4-flops-per-cycle
+Branch prediction
+
+
 #### Know advanced data structures
 Intel VTune Amplifier - heavy metal of profilers
 
@@ -162,10 +190,13 @@ CPU cache:
 
 Intel i7-4770 (Haswell), 3.4 GHz
 
+Sizes:
 L1 Data cache = 32 KB
 L1 Instruction cache = 32 KB
 L2 cache = 256 KB
 L3 cache = 8 MB
+
+Latency:
 L1 Data Cache Latency = 4 cycles for simple access via pointer
 L1 Data Cache Latency = 5 cycles for access with complex address calculation
 L2 Cache Latency = 12 cycles
