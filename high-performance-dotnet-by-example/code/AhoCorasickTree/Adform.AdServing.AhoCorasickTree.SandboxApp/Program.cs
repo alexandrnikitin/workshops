@@ -4,7 +4,7 @@ using Adform.AdServing.AhoCorasickTree.Benchmarks.Utils;
 
 namespace Adform.AdServing.AhoCorasickTree.SandboxApp
 {
-    using AhoCorasickTree = Adform.AdServing.AhoCorasickTree.Sandbox.V8.AhoCorasickTree;
+    using AhoCorasickTree = Adform.AdServing.AhoCorasickTree.Sandbox.V9.AhoCorasickTree;
 
     class Program
     {
