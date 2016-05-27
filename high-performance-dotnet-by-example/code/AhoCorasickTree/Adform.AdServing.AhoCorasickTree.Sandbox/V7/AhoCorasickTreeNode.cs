@@ -83,12 +83,11 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V7
         {
             if (_size == 0) return null;
 
-            var ind = (c & (_size - 1));
+            var ind = c & (_size - 1);
             var keyThere = _entries[ind].Key;
-            var value = _entries[ind].Value;
             if (keyThere != 0 && (keyThere == c))
             {
-                return value;
+                return _entries[ind].Value;
             }
 
             return null;
