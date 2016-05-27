@@ -46,8 +46,6 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V5
             {
                 _results.Add(result);
             }
-
-            IsWord = true;
         }
 
         public void AddResults(IEnumerable<string> results)
@@ -56,8 +54,6 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V5
             {
                 AddResult(result);
             }
-
-            IsWord = true;
         }
 
         public AhoCorasickTreeNode AddTransition(char c)

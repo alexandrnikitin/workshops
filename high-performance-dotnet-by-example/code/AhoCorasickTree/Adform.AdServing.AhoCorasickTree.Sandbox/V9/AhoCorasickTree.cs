@@ -205,6 +205,8 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V9
                        ?? node.AddTransition(c);
             }
             node.AddResult(pattern);
+
+            node.IsWord = true;
         }
 
         private List<AhoCorasickTreeNode> FailToRootNode()
@@ -241,6 +243,12 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V9
                     {
                         node.Failure = failure.GetTransition(value);
                         node.AddResults(node.Failure.Results);
+
+                        if (!node.IsWord)
+                        {
+                            node.IsWord = failure.IsWord;
+                        }
+
                     }
 
                     newNodes.AddRange(node.Transitions);
