@@ -9,6 +9,7 @@ using AhoCorasickTreeV3a = Adform.AdServing.AhoCorasickTree.Sandbox.V3a.AhoCoras
 using AhoCorasickTreeV4 = Adform.AdServing.AhoCorasickTree.Sandbox.V4.AhoCorasickTree;
 using AhoCorasickTreeV5 = Adform.AdServing.AhoCorasickTree.Sandbox.V5.AhoCorasickTree;
 using AhoCorasickTreeV6 = Adform.AdServing.AhoCorasickTree.Sandbox.V6.AhoCorasickTree;
+using AhoCorasickTreeV7 = Adform.AdServing.AhoCorasickTree.Sandbox.V7.AhoCorasickTree;
 
 namespace Adform.AdServing.AhoCorasickTree.Benchmarks
 {
@@ -23,6 +24,7 @@ namespace Adform.AdServing.AhoCorasickTree.Benchmarks
         private readonly AhoCorasickTreeV4 _tree4;
         private readonly AhoCorasickTreeV5 _tree5;
         private readonly AhoCorasickTreeV6 _tree6;
+        private readonly AhoCorasickTreeV7 _tree7;
 
         public ManyKeywordsBenchmark()
         {
@@ -35,6 +37,7 @@ namespace Adform.AdServing.AhoCorasickTree.Benchmarks
             _tree4 = new AhoCorasickTreeV4(keywords);
             _tree5 = new AhoCorasickTreeV5(keywords);
             _tree6 = new AhoCorasickTreeV6(keywords);
+            _tree7 = new AhoCorasickTreeV7(keywords);
         }
 
         [Benchmark(Baseline = true)]
@@ -77,6 +80,12 @@ namespace Adform.AdServing.AhoCorasickTree.Benchmarks
         public bool Test6()
         {
             return _tree6.Contains(UserAgent);
+        }
+
+        [Benchmark]
+        public bool Test7()
+        {
+            return _tree7.Contains(UserAgent);
         }
 
         private class Config : ManualConfig

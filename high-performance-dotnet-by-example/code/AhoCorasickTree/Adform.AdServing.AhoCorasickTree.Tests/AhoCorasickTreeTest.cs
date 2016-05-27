@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Adform.AdServing.AhoCorasickTree.Tests
 {
-    using AhoCorasickTree = Sandbox.V5_old.AhoCorasickTree;
+    using AhoCorasickTree = Sandbox.V7.AhoCorasickTree;
 
     [TestFixture]
     public class AhoCorasickTreeTest
