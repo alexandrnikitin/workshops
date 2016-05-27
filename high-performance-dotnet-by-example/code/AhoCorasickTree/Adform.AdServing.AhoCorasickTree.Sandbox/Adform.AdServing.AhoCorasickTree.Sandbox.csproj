@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="V10\AhoCorasickTree.cs" />
+    <Compile Include="V10\AhoCorasickTreeNode.cs" />
     <Compile Include="V9\AhoCorasickTree.cs" />
     <Compile Include="V9\AhoCorasickTreeNode.cs" />
     <Compile Include="V8\AhoCorasickTree.cs" />
