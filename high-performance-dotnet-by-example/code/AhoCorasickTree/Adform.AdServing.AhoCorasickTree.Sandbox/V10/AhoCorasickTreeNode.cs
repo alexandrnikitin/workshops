@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
 {
-    [DebuggerDisplay("Value = {Value}, TransitionCount = {_transitionsDictionary.Count}")]
     internal class AhoCorasickTreeNode
     {
+        public int Offset;
         public char Value { get; private set; }
         public AhoCorasickTreeNode Failure { get; set; }
 
@@ -19,7 +20,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
         public IEnumerable<AhoCorasickTreeNode> Transitions { get { return _entries.Where(x => x.Key != 0).Select(x => x.Value); } }
 
 
-        private Entry[] _entries;
+        public Entry[] _entries;
         private int _size;
 
 
@@ -126,9 +127,10 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
 
     }
 
+    [StructLayout(LayoutKind.Sequential)]
     internal struct Entry
     {
-        public char Key;
         public AhoCorasickTreeNode Value;
+        public char Key;
     }
 }
