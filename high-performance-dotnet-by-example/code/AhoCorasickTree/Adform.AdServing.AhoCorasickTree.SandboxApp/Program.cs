@@ -14,7 +14,7 @@ namespace Adform.AdServing.AhoCorasickTree.SandboxApp
         {
             var tree = new AhoCorasickTree(ResourcesUtils.GetKeywords());
 
-            for (var i = 0; i < 100000000; i++)
+            for (var i = 0; i < 1000000000; i++)
             {
                 tree.Contains(UserAgent);
             }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
 {
@@ -27,12 +28,14 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private unsafe char getKey(int* currentNodePtr, int ind)
         {
             return *(char*) ((byte*) currentNodePtr + sizeof(int) + sizeof(int) + sizeof(bool) +
                              ind*(sizeof(char) + sizeof(int)));
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private unsafe int* getNext(byte* b, int* currentNodePtr, int ind)
         {
             var n = *((byte*) currentNodePtr + sizeof(int) + sizeof(int) + sizeof(bool) +
@@ -40,6 +43,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
             return (int*) (b + n);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private unsafe bool GetIsWord(byte* b, int* currentNodePtr, int ind)
         {
             var n = *((byte*) currentNodePtr + sizeof(int) + sizeof(int) + sizeof(bool) +
@@ -48,6 +52,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
             return *(bool*) (b + n + sizeof(int) + sizeof(int));
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private unsafe int* GetFailure(byte* b, int* currentNodePtr)
         {
             return (int*) (b + *((byte*) currentNodePtr + sizeof(int)));
@@ -56,14 +61,13 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
 
         public unsafe bool Contains(string text)
         {
-            var currentNode = Root;
-
             fixed (byte* b = _data)
             fixed (char* p = text)
             {
                 char c1, c2, c3, c4;
                 long len = text.Length;
                 long* lptr = (long*) p;
+                lptr--;
                 long l;
 
                 int* currentNodePtr = (int*) b;
@@ -73,12 +77,13 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
 
                 for (int i = 0; i < len; i += 8)
                 {
+                    lptr++;
                     l = *lptr;
                     c1 = (char) (l & 0xffff);
                     c2 = (char) (l >> 16);
                     c3 = (char) (l >> 32);
                     c4 = (char) (l >> 48);
-                    lptr++;
+                    
 
 
                     while (true)
