@@ -28,7 +28,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V9
             fixed (char* p = text)
             {
                 char c1, c2, c3, c4;
-                long len = text.Length;
+                long len = text.Length * 2;
                 long* lptr = (long*)p;
                 long l;
                 for (int i = 0; i < len; i += 8)
