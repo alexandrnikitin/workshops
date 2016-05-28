@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
 {
@@ -317,8 +318,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
 
         private unsafe void CreateArray()
         {
-            var size = GetArraySize();
-            Console.WriteLine(size);
+            //var size = GetArraySize();
             var data = new List<byte>();
 
             var currentPtr = 0;
@@ -335,12 +335,6 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
                 {
                     var currentNode = queue.Dequeue();
 
-                    Console.WriteLine(currentPtr);
-                    if (currentPtr != currentNode.Offset)
-                    {
-                        Console.WriteLine("ALARM");
-                    }
-
                     data.AddRange(BitConverter.GetBytes(currentNode._entries.Length));
                     currentPtr += sizeof(int);
                     data.AddRange(BitConverter.GetBytes(currentNode.Failure.Offset));
@@ -348,16 +342,20 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
                     data.AddRange(BitConverter.GetBytes(currentNode.IsWord));
                     currentPtr += sizeof(bool);
 
-                    foreach (var entry in currentNode._entries)
+                    if (currentNode._entries.Length > 0)
                     {
-                        queue.Enqueue(entry.Value);
+                        foreach (var entry in currentNode._entries.Where(x => x.Key != 0))
+                        {
+                            queue.Enqueue(entry.Value);
 
-                        //charPtr[currentPtr] = entry.Key;
-                        data.AddRange(BitConverter.GetBytes(entry.Key));
-                        currentPtr += sizeof(char);
-                        data.AddRange(BitConverter.GetBytes(entry.Value.Offset));
-                        //nodePtr[currentPtr] = entry.Value.Offset;
-                        currentPtr += sizeof(int);
+                            //charPtr[currentPtr] = entry.Key;
+                            data.AddRange(BitConverter.GetBytes(entry.Key));
+                            currentPtr += sizeof(char);
+                            data.AddRange(BitConverter.GetBytes(entry.Value.Offset));
+                            //nodePtr[currentPtr] = entry.Value.Offset;
+                            currentPtr += sizeof(int);
+                        }
+
                     }
                 }
             }
