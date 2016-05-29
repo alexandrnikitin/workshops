@@ -5,9 +5,37 @@ In progress...
 We have a feature in Adform that identifies unwanted bot traffic. It’s backed by the Aho–Corasick algorithm, a string searching algorithm that matches all strings simultaneously. We will discover the algorithm and its current implementation. We will learn how to write micro benchmarks, profile code and read assembly code. We will improve performance by 20-30 times by different techniques: re-implement BCL data structures, fix CPU cache misses, reduce main memory reads by putting values in CPU registers by force, avoid calls to Method table, evaluate .NET Core (try SIMD?)
 
 
+This workshop consists of two parts: basics and hardcore.
+The first one is a workshop. We will learn how to write micro benchmarks, profile code using different profiles. 
+We will learn how to read IL and assembly code for saner understanding how our code works.
+We will find main bottlenecks and optimize performance significantly.
+
+The second part will be a demonstration. I'll show you how we can use different tools and improve performance by tens times using different optimization techniques.
+
+TODO: slack channel
+  
+### Prerequisites:
+- Laptop (or a peer with a laptop)
+- Aho-Corasick algorithm: Study it and try to implement it by yourself.
+- ILSpy
+- WinDBG[optional]
+- PerfView
+- Intel VTune Amplifier [optional]
+
+What it isn't about:
+* .NET vs JVM vs C++ vs ...
+* .NET is awesome!!!
+* Business logic
+* GC
+
+What it is about:
+
+* Pure performance
+* In 99% cases the bottleneck is a developer not a platform
+
 
 0. Intro
-  * What it's about and what isn't, agenda
+  * What it's about and what isn't
   * Domain field
 0. About the Aho-Corasick algorithm
   * The algorithm explained
@@ -28,24 +56,12 @@ We have a feature in Adform that identifies unwanted bot traffic. It’s backed 
   * SIMD?
 
 
-### Prerequisites:
-- Study the Aho-Corasick algorithm and try to implement it by yourself
-- ildasm, ILSpy
-- WinDBG[optional]
-- PerfView
-- Intel VTune Amplifier [optional]
-
-What it isn't about:
-* .NET vs JVM vs C++
-* .NET is awesome!!!
-* GC
-
 
 
 ### Domain:
 unwanted bot traffic
 
-
+User agent: "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
 
 ### Algorithm:
 https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm
@@ -54,6 +70,10 @@ TODO: http://www.cs.uku.fi/~kilpelai/BSA05/lectures/slides04.pdf
 TODO: https://www.quora.com/What-is-the-most-intuitive-explanation-of-the-Aho-Corasick-string-matching-algorithm
 the only .NET implementation: https://www.informit.com/guides/content.aspx?g=dotnet&seqNum=769
 
+Efficiency vs performance
+
+Lesson 0: First efficiency then performance
+
 
 
 ### Harness:
@@ -61,6 +81,16 @@ the only .NET implementation: https://www.informit.com/guides/content.aspx?g=dot
 #### Microbenchmarks:
 
 is hard!
+
+DOs & DON'Ts from Microsoft:
+
+- **DO** use a microbenchmark when you have an isolated piece of code whose performance you want to analyze.
+- **DO NOT** use a microbenchmark for code that has non-deterministic dependences (e.g. network calls, file I/O etc.)
+- **DO** run all performance testing against retail optimized builds.
+- **DO** run many iterations of the code in question to filter out noise.
+- **DO** minimize the effects of other applications on the performance of the microbenchmark by closing as many unnecessary applications as possible.
+
+https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/performance-guidelines.md#creating-a-microbenchmark
 
 Pipeline:
 A task -> C#
@@ -76,31 +106,31 @@ GC: MS, Boehm, Sgen
 JIT: Legacy x86 & x64, RyuJIT
 Compilation: JIT, NGen, MPGO, .NET Native
 
-DOs & DON'Ts from Microsoft:
-
-- **DO** use a microbenchmark when you have an isolated piece of code whose performance you want to analyze.
-- **DO NOT** use a microbenchmark for code that has non-deterministic dependences (e.g. network calls, file I/O etc.)
-- **DO** run all performance testing against retail optimized builds.
-- **DO** run many iterations of the code in question to filter out noise.
-- **DO** minimize the effects of other applications on the performance of the microbenchmark by closing as many unnecessary applications as possible.
-
-https://github.com/dotnet/coreclr/blob/master/Documentation/project-docs/performance-guidelines.md#creating-a-microbenchmark
 
 ##### BenchmarkDotNet:
+
+https://github.com/PerfDotNet/BenchmarkDotNet
+
 - A sample benchmark
 - Config
 - Diagnosers
 
+Task: A benchmark
+
 How does it work: https://github.com/PerfDotNet/BenchmarkDotNet#how-it-works
 
+Review the sources
 - Isolated project based on templates
 - MethodInvoker: Pilot, Idle, Warmup, Target, Clocks
 - Generated project
-- Results: R plot
+- Results: + R plot
+
 
 Tasks:
 x86 vs x64
 RuyJIT vs LegacyJit
+
+
 
 #### Profiling:
 "Profilers Are Lying Hobbits (and we hate them!)" https://www.infoq.com/presentations/profilers-hotspots-bottlenecks
@@ -108,44 +138,74 @@ RuyJIT vs LegacyJit
 Sandbox console app
 
 
+
 ##### Perfview
 Swiss army knife
 Tutorial
 Videos https://channel9.msdn.com/Series/PerfView-Tutorial
+
 Time based
 Memory
 ETW events
+
 CMD args: https://github.com/lowleveldesign/debug-recipes/blob/master/perfview/perfview-cmdline.txt
 
-#### IL & Assembly code:
-ildasm & ILSpy
+
+
+##### Intel VTune Amplifier
+heavy metal of profilers
+TODO
+$$$
+
+AMD Code XL
+
+
+#### IL:
+
+Ildasm.exe (IL Disassembler):
+
+https://msdn.microsoft.com/en-us/library/f7dy01k1(v=vs.110).aspx
+
+ILSpy
+
+Tasks: Check sources
+
+
+#### Assembly code:
 
 Visual Studio
+TODO options
 
 Windbg - the great and powerful
-SOS Sun of Strike
-SOSex
+SOS Sun of Strike : https://msdn.microsoft.com/en-us/library/bb190764(v=vs.110).aspx
+SOSex: http://www.stevestechspot.com/default.aspx
 HOWTO: Debugging .NET with WinDbg https://docs.google.com/document/d/1yMQ8NAQZEBtsfVp7AsFLSA_MkIKlYNuSowG72_nU0ek
-
 WinDbgCs https://github.com/southpolenator/WinDbgCs
 CLRMD https://github.com/Microsoft/clrmd/blob/master/Documentation/MachineCode.md
 
-TODO: https://github.com/snare/voltron
+Task: Sources
 
 
 
-### Optimizations:
+### Optimizations!!!
+
+### Basics
+
 #### Lesson 1: Know APIs of libraries you use!
 
+Task: Profile current version and find a bottleneck.
+Task: Sandbox lib + Benchmark
 
 #### Lesson 2: Know BCL collections and data structures
+Demo: profile dotTrace
+Profilers are lying hobbits!!!
+
+Side:
 GC modes: Server vs Workstation (BenchmarkDotNet?) CPU groups?
 Try Server GC: less GCs
 
-Profilers are lying hobbits!!!
-Everybody lies!!
+Task: find reason for the allocation. 
 
-box struct task?
 
 
 #### Lesson 3: Know basic data structures
@@ -200,7 +260,7 @@ Branch prediction
 
 
 #### Lesson 5: Know advanced data structures
-Intel VTune Amplifier - heavy metal of profilers
+
 
 
 Classic hashset -> open address hashset
@@ -218,6 +278,13 @@ MOD is expensive
 
 
 #### Lesson: Going unsafe
+
+
+
+
+
+
+### .NET vs JVM vs C++ vs ...
 
 
 ### Experiments
