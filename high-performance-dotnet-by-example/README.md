@@ -59,16 +59,39 @@ What it is about:
 
 
 ### Domain:
-unwanted bot traffic
 
-User agent: "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+All websites receive bot traffic. A study shows that bots drive 16% of Internet traffic in the US, in Singapore this number reaches 56%. 
+Source http://news.solvemedia.com/post/32450539468/solve-media-the-bot-stops-here-infographic
+
+Not all bots are bad, and some of them are vital for the Internet. 
+White bots (good) search engines (Google, Bing), robot.txt
+Grey bots (neutral) - don't bring clients directly, generate load. Frameworks, utilities,
+Black bots (bad) - fraud, intentionaly fake impression, clicks, etc.
+
+My user agent: "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+Google Web search: "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+Google UAs: https://support.google.com/webmasters/answer/1061943?hl=en
+
+
+IAB - Interactive Advertising Bureau
+http://www.iab.com/guidelines/iab-abc-international-spiders-bots-list/
+
+https://gitz.adform.com/marius.kazlauskas/serving/blob/master/Adform.AdServing.Lib/Resources/IAB/exclude.txt
+
+DSP, AdServing, etc
+
 
 ### Algorithm:
 https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm
+Animated:
 http://blog.ivank.net/aho-corasick-algorithm-in-as3.html
+
 TODO: http://www.cs.uku.fi/~kilpelai/BSA05/lectures/slides04.pdf
 TODO: https://www.quora.com/What-is-the-most-intuitive-explanation-of-the-Aho-Corasick-string-matching-algorithm
+
 the only .NET implementation: https://www.informit.com/guides/content.aspx?g=dotnet&seqNum=769
+
+Grep
 
 Efficiency vs performance
 
@@ -185,7 +208,8 @@ CLRMD https://github.com/Microsoft/clrmd/blob/master/Documentation/MachineCode.m
 
 Task: Sources
 
-
+More reads:
+A fundamental introduction to x86 assembly programming https://www.nayuki.io/page/a-fundamental-introduction-to-x86-assembly-programming
 
 ### Optimizations!!!
 
@@ -278,9 +302,11 @@ MOD is expensive
 
 
 #### Lesson: Going unsafe
+"All is Fair in Love and War"
 
 
-
+#### MOAR
+Reconstruct array with data based on real production load.
 
 
 
@@ -288,7 +314,6 @@ MOD is expensive
 
 
 ### Experiments
-#### "All is Fair in Love and War"
 #### .NET Core
 #### SIMD
 
@@ -297,4 +322,3 @@ MOD is expensive
 ### Further reads
 Pro .NET Performance by Sasha Goldshtein , Dima Zurbalev , Ido Flatow
 Writing High-Performance .NET Code by Ben Watson
-A fundamental introduction to x86 assembly programming https://www.nayuki.io/page/a-fundamental-introduction-to-x86-assembly-programming
