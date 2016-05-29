@@ -16,9 +16,9 @@ TODO: slack channel
   
 ### Prerequisites:
 - Laptop (or a peer with a laptop)
-- Aho-Corasick algorithm: Study it and try to implement it by yourself.
+- Aho-Corasick algorithm: try to implement it by yourself.
 - ILSpy
-- WinDBG[optional]
+- WinDBG [optional]
 - PerfView
 - Intel VTune Amplifier [optional]
 
@@ -83,17 +83,28 @@ DSP, AdServing, etc
 
 ### Algorithm:
 https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm
+a string searching algorithm
+accepts a finite set of strings we want to find
+it matches all strings simultaneously
+backed by a trie
+additional "failure" collections between nodes
+
+Grep
+
 Animated:
 http://blog.ivank.net/aho-corasick-algorithm-in-as3.html
+
 
 TODO: http://www.cs.uku.fi/~kilpelai/BSA05/lectures/slides04.pdf
 TODO: https://www.quora.com/What-is-the-most-intuitive-explanation-of-the-Aho-Corasick-string-matching-algorithm
 
+
 the only .NET implementation: https://www.informit.com/guides/content.aspx?g=dotnet&seqNum=769
 
-Grep
+
 
 Efficiency vs performance
+Commute: sport car vs bicycle
 
 Lesson 0: First efficiency then performance
 
@@ -124,6 +135,7 @@ ASM + CPU -> Result
 
 Infrastructure:
 OS: Windows, Linux, OS X
+Compilers: Legacy, Roslyn
 CLR: CLR2, CLR4, CoreCLR, Mono
 GC: MS, Boehm, Sgen
 JIT: Legacy x86 & x64, RyuJIT
@@ -160,6 +172,7 @@ RuyJIT vs LegacyJit
 
 Sandbox console app
 
+#### dotTrace & co
 
 
 ##### Perfview
@@ -167,8 +180,8 @@ Swiss army knife
 Tutorial
 Videos https://channel9.msdn.com/Series/PerfView-Tutorial
 
-Time based
-Memory
+Time based - sampling
+Memory profiling
 ETW events
 
 CMD args: https://github.com/lowleveldesign/debug-recipes/blob/master/perfview/perfview-cmdline.txt
@@ -222,13 +235,16 @@ Task: Sandbox lib + Benchmark
 
 #### Lesson 2: Know BCL collections and data structures
 Demo: profile dotTrace
+Demo: Perfview
 Profilers are lying hobbits!!!
+
+BenchmarkDotNet MemoryDiagnoser
 
 Side:
 GC modes: Server vs Workstation (BenchmarkDotNet?) CPU groups?
 Try Server GC: less GCs
 
-Task: find reason for the allocation. 
+Task: find reason for the allocation using Perfview & ILSpy
 
 
 
@@ -259,6 +275,8 @@ jle 0x7ffcbc4238a1
 #### Lesson 4: Know how CPU works
 
 CPU: Front-End & Back-End
+TODO video
+
 CPU cache
 
 Intel i7-4770 (Haswell), 3.4 GHz
@@ -280,7 +298,8 @@ Source: http://www.7-cpu.com/cpu/Haswell.html
 
 
 FLOPs per cycle: http://stackoverflow.com/questions/8389648/how-do-i-achieve-the-theoretical-maximum-of-4-flops-per-cycle
-Branch prediction
+
+TODO Branch prediction
 
 
 #### Lesson 5: Know advanced data structures
