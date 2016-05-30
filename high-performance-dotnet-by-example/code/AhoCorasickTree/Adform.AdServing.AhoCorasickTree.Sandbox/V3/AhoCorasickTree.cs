@@ -44,7 +44,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V3
                 else if (onlyStarts)
                     return false;
 
-                if (pointer.Results.GetEnumerator().MoveNext())
+                if (pointer.Results.Count > 0)
                     return true;
             }
             return false;

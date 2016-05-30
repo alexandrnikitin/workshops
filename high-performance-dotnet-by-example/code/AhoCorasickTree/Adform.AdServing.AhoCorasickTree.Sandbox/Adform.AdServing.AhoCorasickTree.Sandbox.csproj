@@ -61,8 +61,6 @@
     <Compile Include="V4\AhoCorasickTreeNode.cs" />
     <Compile Include="V3\AhoCorasickTree.cs" />
     <Compile Include="V3\AhoCorasickTreeNode.cs" />
-    <Compile Include="V3a\AhoCorasickTree.cs" />
-    <Compile Include="V3a\AhoCorasickTreeNode.cs" />
     <Compile Include="V2\AhoCorasickTree.cs" />
     <Compile Include="V2\AhoCorasickTreeNode.cs" />
   </ItemGroup>
