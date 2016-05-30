@@ -12,13 +12,14 @@ We will find main bottlenecks and optimize performance significantly.
 
 The second part will be a demonstration. I'll show you how we can use different tools and improve performance by tens times using different optimization techniques.
 
-TODO: slack channel
-  
+Slack: https://adform.slack.com/archives/workshop-highperf-net
+
 ### Prerequisites:
 - Laptop (or a peer with a laptop)
 - Aho-Corasick algorithm: try to implement it by yourself.
 - ILSpy
 - WinDBG [optional]
+- dotTrace [optional]
 - PerfView
 - Intel VTune Amplifier [optional]
 
@@ -31,7 +32,6 @@ What it isn't about:
 What it is about:
 
 * Pure performance
-* In 99% cases the bottleneck is a developer not a platform
 
 
 0. Intro
@@ -329,15 +329,11 @@ Reconstruct array with data based on real production load.
 
 
 
-### .NET vs JVM vs C++ vs ...
+###
+
+* .NET vs JVM vs C++ vs ...
+* In 99% cases the bottleneck is a developer not a platform
 
 
 ### Experiments
 #### .NET Core
-#### SIMD
-
-
-
-### Further reads
-Pro .NET Performance by Sasha Goldshtein , Dima Zurbalev , Ido Flatow
-Writing High-Performance .NET Code by Ben Watson
