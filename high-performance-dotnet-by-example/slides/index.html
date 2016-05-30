@@ -355,7 +355,7 @@ window.onload = function() {
 <div>Way to get the guts:
   <ul>
     <li>Visual Studio</li>
-    <li>WinDBG - the great and powerful</li>
+    <li>WinDBG</li>
     <li>Intel VTune Amplifier</li>
   </ul>
 </div>
@@ -378,7 +378,6 @@ window.onload = function() {
 <div><em>Task:</em> get the guts</div>
 
 
-
 <div><em>Optimizations</em></div>
 <div><em>Task:</em> find the bottleneck</div>
 <div><em>Task:</em> optimize it</div>
@@ -396,3 +395,121 @@ window.onload = function() {
 <div><em>Lesson 3: </em> Know BCL collections and data structures</div>
 
 <div><em>Demo: </em> Time for a MR</div>
+
+
+<div><em>Lesson 4: </em> Know data structures</div>
+<div>BCL is too generic and isn't suitable for high performance</div>
+
+
+
+
+<div><em>Demo: </em>Intel VTune Amplifier
+Basic hotspots -> Memory access
+</div>
+<div><em>Lesson 5: </em> Know overheads</div>
+
+<!--
+
+#### Lesson 4: Know overheads
+
+Memory writes & reads for a call
+```
+var transition = GetTransition(c, ref pointer);
+```
+push & pop from the stack
+
+
+
+
+Memory reads
+```
+if (pointer.Results.Count > 0)
+```
+```
+mov rax, qword ptr [rsp+0x28]
+mov rax, qword ptr [rax+0x10]
+cmp dword ptr [rax+0x18], 0x0
+jle 0x7ffcbc4238a1
+```
+-->
+
+<div><em>Demo: Intel VTune Amplifier General Exploration</em></div>
+
+<div><em>how CPU works</em></div>
+<div><img src="img/cpu.jpg" alt=""></div>
+<div>
+  <a href="https://en.wikipedia.org/wiki/Central_processing_unit">Wikipedia knows everything</a><br>
+  Fetch -> Decode -> Execute <br><br>
+  Front-end & Back-end<br><br>
+  CPU cache,  branch prediction, speculative execution, and out-of-order execution
+</div>
+
+<div><pre>Intel i7-4770 (Haswell), 3.4 GHz
+
+  L1 Data cache = 32 KB
+  L1 Instruction cache = 32 KB
+  L2 cache = 256 KB
+  L3 cache = <em>8 MB</em>
+
+  L1 Data Cache Latency = 4-5 cycles
+  L2 Cache Latency = 12 cycles
+  L3 Cache Latency = <em>36 cycles</em>
+  RAM Latency = <em>36 cycles + 57 ns</em>
+</pre></div>
+
+<div>Instructions/FLOPs per cycle: <br><br>
+  <a href="http://stackoverflow.com/questions/8389648/how-do-i-achieve-the-theoretical-maximum-of-4-flops-per-cycle">How to achieve theoretical maximum</a>
+</div>
+
+<div>
+  Resources: <br><br>
+  <a href="https://www.youtube.com/watch?v=Nsf2_Au6KxU">Performance Optimization, SIMD and Cache by Sergiy Migdalskiy</a> 👍👍👍 <br><br>
+  <a href="https://gist.github.com/ocornut/cb980ea183e848685a36">Memory, Cache, CPU optimization resources</a>
+</div>
+
+
+
+<!--
+
+TODO Branch prediction
+
+
+#### Lesson 5: Know advanced data structures
+
+
+
+Classic hashset -> open address hashset
+
+Memory exploration
+
+
+
+#### Lesson 6: Know hacks
+
+MOD is expensive
+
+
+#### Lesson 7: Loop unrolling
+
+
+#### Lesson: Going unsafe
+"All is Fair in Love and War"
+
+
+#### MOAR
+Reconstruct array with data based on real production load.
+
+
+
+###
+
+* .NET vs JVM vs C++ vs ...
+* In 99% cases the bottleneck is a developer not a platform
+
+
+### Experiments
+#### .NET Core
+
+
+
+-->
