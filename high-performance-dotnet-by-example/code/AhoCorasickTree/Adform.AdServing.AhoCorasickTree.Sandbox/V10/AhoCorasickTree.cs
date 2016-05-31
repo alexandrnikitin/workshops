@@ -68,7 +68,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
             fixed (char* p = text)
             {
                 char c1, c2, c3, c4;
-                long len = text.Length*2;
+                int len = text.Length*2;
                 long* lptr = (long*) p;
                 lptr--;
                 long l;
@@ -78,15 +78,85 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
                 int ind;
                 char key;
 
-                for (int i = 0; i < len; i += 8)
+                int count = len / 8;
+                len -= (len / 8) * 8;
+                while (count > 0)
                 {
-                    lptr++;
+                    count--;
                     l = *lptr;
                     c1 = (char) (l & 0xffff);
                     c2 = (char) (l >> 16);
                     c3 = (char) (l >> 32);
                     c4 = (char) (l >> 48);
+                    lptr++;
 
+                    size = *currentNodePtr;
+                    if (size == 0) currentNodePtr = GetFailure(b, currentNodePtr);
+
+                    ind = c1 & (size - 1);
+                    key = getKey(currentNodePtr, ind);
+                    if (key == c1)
+                    {
+                        if (GetIsWord(b, currentNodePtr, ind)) return true; 
+                        currentNodePtr = getNext(b, currentNodePtr, ind);
+                    }
+                    else
+                    {
+                        currentNodePtr = GetFailure(b, currentNodePtr);
+                    }
+
+                    size = *currentNodePtr;
+                    if (size == 0) currentNodePtr = GetFailure(b, currentNodePtr);
+
+                    ind = c2 & (size - 1);
+                    key = getKey(currentNodePtr, ind);
+                    if (key == c2)
+                    {
+                        if (GetIsWord(b, currentNodePtr, ind)) return true; 
+                        currentNodePtr = getNext(b, currentNodePtr, ind);
+                    }
+                    else
+                    {
+                        currentNodePtr = GetFailure(b, currentNodePtr);
+                    }
+
+                    size = *currentNodePtr;
+                    if (size == 0) currentNodePtr = GetFailure(b, currentNodePtr);
+
+                    ind = c3 & (size - 1);
+                    key = getKey(currentNodePtr, ind);
+                    if (key == c3)
+                    {
+                        if (GetIsWord(b, currentNodePtr, ind)) return true; 
+                        currentNodePtr = getNext(b, currentNodePtr, ind);
+                    }
+                    else
+                    {
+                        currentNodePtr = GetFailure(b, currentNodePtr);
+                    }
+
+                    size = *currentNodePtr;
+                    if (size == 0) currentNodePtr = GetFailure(b, currentNodePtr);
+
+                    ind = c4 & (size - 1);
+                    key = getKey(currentNodePtr, ind);
+                    if (key == c4)
+                    {
+                        if (GetIsWord(b, currentNodePtr, ind)) return true; 
+                        currentNodePtr = getNext(b, currentNodePtr, ind);
+                    }
+                    else
+                    {
+                        currentNodePtr = GetFailure(b, currentNodePtr);
+                    }
+                }
+
+                var cptr = (char*)lptr;
+                while (len > 0)
+                {
+                    c1 = *cptr;
+                    cptr++;
+                    len -= 2;
 
                     while (true)
                     {
@@ -94,86 +164,14 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
                         if (size == 0)
                         {
                             currentNodePtr = GetFailure(b, currentNodePtr);
-                            if (currentNodePtr == b && c1 == '\0') break;
+                            if (currentNodePtr == b) break;
                         }
 
                         ind = c1 & (size - 1);
                         key = getKey(currentNodePtr, ind);
                         if (key == c1)
                         {
-                            if (GetIsWord(b, currentNodePtr, ind))
-                            {
-                                return true;
-                            }
-                            currentNodePtr = getNext(b, currentNodePtr, ind);
-                        }
-                        else
-                        {
-                            currentNodePtr = GetFailure(b, currentNodePtr);
-                            if (currentNodePtr == b && c2 == '\0') break;
-                        }
-
-                        size = *currentNodePtr;
-                        if (size == 0)
-                        {
-                            currentNodePtr = GetFailure(b, currentNodePtr);
-                            if (currentNodePtr == b && c2 == '\0') break;
-                        }
-
-                        ind = c2 & (size - 1);
-                        key = getKey(currentNodePtr, ind);
-                        if (key == c2)
-                        {
-                            if (GetIsWord(b, currentNodePtr, ind))
-                            {
-                                return true;
-                            }
-                            currentNodePtr = getNext(b, currentNodePtr, ind);
-                        }
-                        else
-                        {
-                            currentNodePtr = GetFailure(b, currentNodePtr);
-                            if (currentNodePtr == b && c3 == '\0') break;
-                        }
-
-                        size = *currentNodePtr;
-                        if (size == 0)
-                        {
-                            currentNodePtr = GetFailure(b, currentNodePtr);
-                            if (currentNodePtr == b && c3 == '\0') break;
-                        }
-
-                        ind = c3 & (size - 1);
-                        key = getKey(currentNodePtr, ind);
-                        if (key == c3)
-                        {
-                            if (GetIsWord(b, currentNodePtr, ind))
-                            {
-                                return true;
-                            }
-                            currentNodePtr = getNext(b, currentNodePtr, ind);
-                        }
-                        else
-                        {
-                            currentNodePtr = GetFailure(b, currentNodePtr);
-                            if (currentNodePtr == b && c4 == '\0') break;
-                        }
-
-                        size = *currentNodePtr;
-                        if (size == 0)
-                        {
-                            currentNodePtr = GetFailure(b, currentNodePtr);
-                            if (currentNodePtr == b && c4 == '\0') break;
-                        }
-
-                        ind = c4 & (size - 1);
-                        key = getKey(currentNodePtr, ind);
-                        if (key == c4)
-                        {
-                            if (GetIsWord(b, currentNodePtr, ind))
-                            {
-                                return true;
-                            }
+                            if (GetIsWord(b, currentNodePtr, ind)) return true;
                             currentNodePtr = getNext(b, currentNodePtr, ind);
                             break;
                         }

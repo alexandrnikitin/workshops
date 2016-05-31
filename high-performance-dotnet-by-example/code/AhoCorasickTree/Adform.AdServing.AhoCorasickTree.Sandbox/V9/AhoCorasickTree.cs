@@ -27,11 +27,15 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V9
 
             fixed (char* p = text)
             {
+                AhoCorasickTreeNode node;
                 char c1, c2, c3, c4;
-                long len = text.Length * 2;
+                int len = text.Length * 2;
                 long* lptr = (long*)p;
                 long l;
-                for (int i = 0; i < len; i += 8)
+
+                int count = len / 8;
+                len -= (len / 8) * 8;
+                while (count > 0)
                 {
                     l = *lptr;
                     c1 = (char)(l & 0xffff);
@@ -40,81 +44,80 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V9
                     c4 = (char)(l >> 48);
                     lptr++;
 
-                    while (true)
+                    C1:
+                    node = currentNode.GetTransition(c1);
+                    if (node != null)
                     {
-                        var node = currentNode.GetTransition(c1);
-                        if (node == null)
-                        {
-                            currentNode = currentNode.Failure;
-                            if (currentNode == Root && c2 == '\0')
-                            {
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            if (node.IsWord)
-                            {
-                                return true;
-                            }
-                            currentNode = node;
-                        }
+                        if (node.IsWord) return true;
 
-                        node = currentNode.GetTransition(c2);
-                        if (node == null)
-                        {
-                            currentNode = currentNode.Failure;
-                            if (currentNode == Root && c3 == '\0')
-                            {
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            if (node.IsWord)
-                            {
-                                return true;
-                            }
-                            currentNode = node;
-                        }
+                        currentNode = node;
+                    }
+                    else
+                    {
+                        currentNode = currentNode.Failure;
+                        if (currentNode != Root) goto C1;
+                    }
 
-                        node = currentNode.GetTransition(c3);
-                        if (node == null)
-                        {
-                            currentNode = currentNode.Failure;
-                            if (currentNode == Root && c4 == '\0')
-                            {
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            if (node.IsWord)
-                            {
-                                return true;
-                            }
+                    C2:
+                    node = currentNode.GetTransition(c2);
+                    if (node != null)
+                    {
+                        if (node.IsWord) return true;
+                        currentNode = node;
+                    }
+                    else
+                    {
+                        currentNode = currentNode.Failure;
+                        if (currentNode != Root) goto C2;
+                    }
 
-                            currentNode = node;
-                        }
+                    C3:
+                    node = currentNode.GetTransition(c3);
+                    if (node != null)
+                    {
+                        if (node.IsWord) return true;
+                        currentNode = node;
+                    }
+                    else
+                    {
+                        currentNode = currentNode.Failure;
+                        if (currentNode != Root) goto C3;
+                    }
 
-                        node = currentNode.GetTransition(c4);
-                        if (node == null)
-                        {
-                            currentNode = currentNode.Failure;
-                            if (currentNode == Root)
-                            {
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            if (node.IsWord)
-                            {
-                                return true;
-                            }
-                            currentNode = node;
-                            break;
-                        }
+                    C4:
+                    node = currentNode.GetTransition(c4);
+                    if (node != null)
+                    {
+                        if (node.IsWord) return true;
+                        currentNode = node;
+                    }
+                    else
+                    {
+                        currentNode = currentNode.Failure;
+                        if (currentNode != Root) goto C4;
+                    }
+
+                    count--;
+                }
+
+                var cptr = (char*)lptr;
+                
+                while (len > 0)
+                {
+                    c1 = *cptr;
+                    cptr++;
+                    len -= 2;
+
+                    node = currentNode.GetTransition(c1);
+                    if (node != null)
+                    {
+                        if (node.IsWord) return true;
+
+                        currentNode = node;
+                    }
+                    else
+                    {
+                        currentNode = currentNode.Failure;
                     }
                 }
             }
