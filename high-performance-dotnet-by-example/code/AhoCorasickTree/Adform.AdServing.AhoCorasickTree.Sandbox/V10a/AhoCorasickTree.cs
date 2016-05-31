@@ -32,32 +32,23 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private unsafe char getKey(int* currentNodePtr, int ind)
         {
-            return *(char*) ((byte*) currentNodePtr + sizeof(int) + sizeof(int) + sizeof(bool) +
-                             ind*(sizeof(char) + sizeof(int)));
+            return *(char*)((byte*)currentNodePtr + sizeof(int) + sizeof(int) +
+                             ind * (sizeof(char) + sizeof(int)));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private unsafe int* getNext(byte* b, int* currentNodePtr, int ind)
         {
-            var offset = sizeof(int) + sizeof(int) + sizeof(bool) +
-                         ind*(sizeof(char) + sizeof(int)) + sizeof(char);
+            var offset = sizeof(int) + sizeof(int) +
+                         ind * (sizeof(char) + sizeof(int)) + sizeof(char);
             var n = *(int*)((byte*)currentNodePtr + offset);
-            return (int*) (b + n);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe bool GetIsWord(byte* b, int* currentNodePtr, int ind)
-        {
-            var n = *(int*)((byte*) currentNodePtr + sizeof(int) + sizeof(int) + sizeof(bool) +
-                      ind*(sizeof(char) + sizeof(int)) + sizeof(char));
-
-            return *(bool*) (b + n + sizeof(int) + sizeof(int));
+            return (int*)(b + n);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private unsafe int* GetFailure(byte* b, int* currentNodePtr)
         {
-            return (int*) (b + *(int*)((byte*) currentNodePtr + sizeof(int)));
+            return (int*)(b + *(int*)((byte*)currentNodePtr + sizeof(int)));
         }
 
 
@@ -67,12 +58,12 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
             fixed (char* p = text)
             {
                 char c1, c2, c3, c4;
-                int len = text.Length*2;
-                long* lptr = (long*) p;
-                lptr--;
+                int len = text.Length * 2;
+                long* lptr = (long*)p;
+                //lptr--;
                 long l;
 
-                int* currentNodePtr = (int*) b;
+                int* currentNodePtr = (int*)b;
                 int size;
                 int ind;
                 char key;
@@ -83,70 +74,74 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
                 {
                     count--;
                     l = *lptr;
-                    c1 = (char) (l & 0xffff);
-                    c2 = (char) (l >> 16);
-                    c3 = (char) (l >> 32);
-                    c4 = (char) (l >> 48);
+                    c1 = (char)(l & 0xffff);
+                    c2 = (char)(l >> 16);
+                    c3 = (char)(l >> 32);
+                    c4 = (char)(l >> 48);
                     lptr++;
 
+                    C1:
                     size = *currentNodePtr;
-                    if (size == 0) currentNodePtr = GetFailure(b, currentNodePtr);
-
                     ind = c1 & (size - 1);
                     key = getKey(currentNodePtr, ind);
                     if (key == c1)
                     {
-                        if (GetIsWord(b, currentNodePtr, ind)) return true; 
-                        currentNodePtr = getNext(b, currentNodePtr, ind);
+                        var nextPtr = getNext(b, currentNodePtr, ind);
+                        if (nextPtr == b) return true;
+                        currentNodePtr = nextPtr;
                     }
                     else
                     {
                         currentNodePtr = GetFailure(b, currentNodePtr);
+                        if (currentNodePtr != b) goto C1;
                     }
 
+                    C2:
                     size = *currentNodePtr;
-                    if (size == 0) currentNodePtr = GetFailure(b, currentNodePtr);
-
                     ind = c2 & (size - 1);
                     key = getKey(currentNodePtr, ind);
                     if (key == c2)
                     {
-                        if (GetIsWord(b, currentNodePtr, ind)) return true; 
-                        currentNodePtr = getNext(b, currentNodePtr, ind);
+                        var nextPtr = getNext(b, currentNodePtr, ind);
+                        if (nextPtr == b) return true;
+                        currentNodePtr = nextPtr;
                     }
                     else
                     {
                         currentNodePtr = GetFailure(b, currentNodePtr);
+                        if (currentNodePtr != b) goto C2;
                     }
 
+                    C3:
                     size = *currentNodePtr;
-                    if (size == 0) currentNodePtr = GetFailure(b, currentNodePtr);
-
                     ind = c3 & (size - 1);
                     key = getKey(currentNodePtr, ind);
                     if (key == c3)
                     {
-                        if (GetIsWord(b, currentNodePtr, ind)) return true; 
-                        currentNodePtr = getNext(b, currentNodePtr, ind);
+                        var nextPtr = getNext(b, currentNodePtr, ind);
+                        if (nextPtr == b) return true;
+                        currentNodePtr = nextPtr;
                     }
                     else
                     {
                         currentNodePtr = GetFailure(b, currentNodePtr);
+                        if (currentNodePtr != b) goto C3;
                     }
 
+                    C4:
                     size = *currentNodePtr;
-                    if (size == 0) currentNodePtr = GetFailure(b, currentNodePtr);
-
                     ind = c4 & (size - 1);
                     key = getKey(currentNodePtr, ind);
                     if (key == c4)
                     {
-                        if (GetIsWord(b, currentNodePtr, ind)) return true; 
-                        currentNodePtr = getNext(b, currentNodePtr, ind);
+                        var nextPtr = getNext(b, currentNodePtr, ind);
+                        if (nextPtr == b) return true;
+                        currentNodePtr = nextPtr;
                     }
                     else
                     {
                         currentNodePtr = GetFailure(b, currentNodePtr);
+                        if (currentNodePtr != b) goto C4;
                     }
                 }
 
@@ -157,28 +152,20 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
                     cptr++;
                     len -= 2;
 
-                    while (true)
+                    C1:
+                    size = *currentNodePtr;
+                    ind = c1 & (size - 1);
+                    key = getKey(currentNodePtr, ind);
+                    if (key == c1)
                     {
-                        size = *currentNodePtr;
-                        if (size == 0)
-                        {
-                            currentNodePtr = GetFailure(b, currentNodePtr);
-                            if (currentNodePtr == b) break;
-                        }
-
-                        ind = c1 & (size - 1);
-                        key = getKey(currentNodePtr, ind);
-                        if (key == c1)
-                        {
-                            if (GetIsWord(b, currentNodePtr, ind)) return true;
-                            currentNodePtr = getNext(b, currentNodePtr, ind);
-                            break;
-                        }
-                        else
-                        {
-                            currentNodePtr = GetFailure(b, currentNodePtr);
-                            if (currentNodePtr == b) break;
-                        }
+                        var nextPtr = getNext(b, currentNodePtr, ind);
+                        if (nextPtr == b) return true;
+                        currentNodePtr = nextPtr;
+                    }
+                    else
+                    {
+                        currentNodePtr = GetFailure(b, currentNodePtr);
+                        if (currentNodePtr != b) goto C1;
                     }
                 }
             }
@@ -320,45 +307,30 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
             }
         }
 
-        private unsafe void CreateArray()
+        private void CreateArray()
         {
-            //var size = GetArraySize();
             var data = new List<byte>();
-
-            var currentPtr = 0;
-
-            //fixed (byte* bytePtr = bytes)
+            var queue = new Queue<AhoCorasickTreeNode>();
+            queue.Enqueue(Root);
+            while (queue.Count > 0)
             {
-                //var charPtr = (char*) bytePtr;
-                //var intPtr = (int*) bytePtr;
-                //var boolPtr = (bool*) bytePtr;
+                var currentNode = queue.Dequeue();
+                if (currentNode._entries.Length == 0) continue;
 
-                var queue = new Queue<AhoCorasickTreeNode>();
-                queue.Enqueue(Root);
-                while (queue.Count > 0)
+                data.AddRange(BitConverter.GetBytes(currentNode._entries.Length));
+                data.AddRange(BitConverter.GetBytes(currentNode.Failure.Offset));
+
+                if (currentNode._entries.Length > 0)
                 {
-                    var currentNode = queue.Dequeue();
-
-                    data.AddRange(BitConverter.GetBytes(currentNode._entries.Length));
-                    currentPtr += sizeof(int);
-                    data.AddRange(BitConverter.GetBytes(currentNode.Failure.Offset));
-                    currentPtr += sizeof(int);
-                    data.AddRange(BitConverter.GetBytes(currentNode.IsWord));
-                    currentPtr += sizeof(bool);
-
-                    if (currentNode._entries.Length > 0)
+                    foreach (var entry in currentNode._entries.Where(x => x.Key != 0))
                     {
-                        foreach (var entry in currentNode._entries.Where(x => x.Key != 0))
-                        {
-                            queue.Enqueue(entry.Value);
+                        queue.Enqueue(entry.Value);
 
-                            //charPtr[currentPtr] = entry.Key;
-                            data.AddRange(BitConverter.GetBytes(entry.Key));
-                            currentPtr += sizeof(char);
-                            data.AddRange(BitConverter.GetBytes(entry.Value.Offset));
-                            //nodePtr[currentPtr] = entry.Value.Offset;
-                            currentPtr += sizeof(int);
-                        }
+                        data.AddRange(BitConverter.GetBytes(entry.Key));
+
+                        data.AddRange(entry.Value.IsWord
+                            ? BitConverter.GetBytes(0)
+                            : BitConverter.GetBytes(entry.Value.Offset));
                     }
                 }
             }
@@ -376,6 +348,9 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
             while (queue.Count > 0)
             {
                 var currentNode = queue.Dequeue();
+
+                if (currentNode._entries.Length == 0) continue;
+
                 currentNode.Offset = calcOffset(roots, elements);
                 roots++;
                 foreach (var entry in currentNode._entries.Where(x => x.Key != 0))
@@ -386,12 +361,12 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
             }
 
 
-            return calcOffset(roots, elements)*2;
+            return calcOffset(roots, elements) * 2;
         }
 
         private int calcOffset(int roots, int childs)
         {
-            return roots*(sizeof(int) + sizeof(int) + sizeof(bool)) + childs*(sizeof(char) + sizeof(int));
+            return roots * (sizeof(int) + sizeof(int)) + childs * (sizeof(char) + sizeof(int));
         }
     }
 }
