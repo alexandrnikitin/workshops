@@ -78,10 +78,10 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
                     C1:
                     size = *(int*)currentNodePtr;
                     ind = c1 & (size - 1);
-                    key = getKey(currentNodePtr, ind);
+                    key = GetKey(currentNodePtr, ind);
                     if (key == c1)
                     {
-                        var nextPtr = getNext(b, currentNodePtr, ind);
+                        var nextPtr = GetNext(b, currentNodePtr, ind);
                         if (nextPtr == b) return true;
                         currentNodePtr = nextPtr;
                     }
@@ -94,10 +94,10 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
                     C2:
                     size = *(int*)currentNodePtr;
                     ind = c2 & (size - 1);
-                    key = getKey(currentNodePtr, ind);
+                    key = GetKey(currentNodePtr, ind);
                     if (key == c2)
                     {
-                        var nextPtr = getNext(b, currentNodePtr, ind);
+                        var nextPtr = GetNext(b, currentNodePtr, ind);
                         if (nextPtr == b) return true;
                         currentNodePtr = nextPtr;
                     }
@@ -110,10 +110,10 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
                     C3:
                     size = *(int*)currentNodePtr;
                     ind = c3 & (size - 1);
-                    key = getKey(currentNodePtr, ind);
+                    key = GetKey(currentNodePtr, ind);
                     if (key == c3)
                     {
-                        var nextPtr = getNext(b, currentNodePtr, ind);
+                        var nextPtr = GetNext(b, currentNodePtr, ind);
                         if (nextPtr == b) return true;
                         currentNodePtr = nextPtr;
                     }
@@ -126,10 +126,10 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
                     C4:
                     size = *(int*)currentNodePtr;
                     ind = c4 & (size - 1);
-                    key = getKey(currentNodePtr, ind);
+                    key = GetKey(currentNodePtr, ind);
                     if (key == c4)
                     {
-                        var nextPtr = getNext(b, currentNodePtr, ind);
+                        var nextPtr = GetNext(b, currentNodePtr, ind);
                         if (nextPtr == b) return true;
                         currentNodePtr = nextPtr;
                     }
@@ -150,10 +150,10 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
                     C1:
                     size = *(int*)currentNodePtr;
                     ind = c1 & (size - 1);
-                    key = getKey(currentNodePtr, ind);
+                    key = GetKey(currentNodePtr, ind);
                     if (key == c1)
                     {
-                        var nextPtr = getNext(b, currentNodePtr, ind);
+                        var nextPtr = GetNext(b, currentNodePtr, ind);
                         if (nextPtr == b) return true;
                         currentNodePtr = nextPtr;
                     }

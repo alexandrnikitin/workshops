@@ -7,7 +7,7 @@ using BenchmarkDotNet.Jobs;
 namespace Adform.AdServing.AhoCorasickTree.Benchmarks
 {
     using AhoCorasickTreeBaseline = Adform.AdServing.AhoCorasickTree.Sandbox.V8.AhoCorasickTree;
-    using AhoCorasickTreeImproved = Adform.AdServing.AhoCorasickTree.Sandbox.V10a.AhoCorasickTree;
+    using AhoCorasickTreeImproved = Adform.AdServing.AhoCorasickTree.Sandbox.V10.AhoCorasickTree;
 
     [Config(typeof(Config))]
     public class ManyKeywordsBenchmark
