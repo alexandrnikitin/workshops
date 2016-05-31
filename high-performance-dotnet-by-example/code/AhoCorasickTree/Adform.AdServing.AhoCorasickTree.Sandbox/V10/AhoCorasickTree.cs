@@ -30,13 +30,13 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe char getKey(byte* currentNodePtr, int ind)
+        private unsafe char GetKey(byte* currentNodePtr, int ind)
         {
             return *(char*)(currentNodePtr + sizeof(int) + sizeof(int) + ind * (sizeof(char) + sizeof(int)));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe byte* getNext(byte* b, byte* currentNodePtr, int ind)
+        private unsafe byte* GetNext(byte* b, byte* currentNodePtr, int ind)
         {
             return b + *(int*)(currentNodePtr + (sizeof(int) + sizeof(int) + ind * (sizeof(char) + sizeof(int)) + sizeof(char)));
         }
