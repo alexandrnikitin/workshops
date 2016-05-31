@@ -198,6 +198,7 @@ window.onload = function() {
     <li>Black bots (bad) - fraud</li>
   </ul>
 </div>
+<div>Clients don't want to pay for bot traffic</div>
 <div>My User Agent: <br><br> "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"</div>
 <div>Google Web search UA: <br><br> "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"</div>
 <div><a href="https://support.google.com/webmasters/answer/1061943?hl=en">Google's User Agents</a></div>
@@ -406,6 +407,19 @@ window.onload = function() {
 <div><em>Demo: </em>Intel VTune Amplifier
 Basic hotspots -> Memory access
 </div>
+
+<div><pre>
+Memory reads
+
+if (pointer.Results.Count > 0)
+
+mov rax, qword ptr [rsp+0x28]
+mov rax, qword ptr [rax+0x10]
+cmp dword ptr [rax+0x18], 0x0
+jle 0x7ffcbc4238a1
+
+</pre></div>
+
 <div><em>Lesson 5: </em> Know overheads</div>
 
 <!--
@@ -470,6 +484,16 @@ jle 0x7ffcbc4238a1
 <div><em>Lesson 7: </em> Know hacks</div>
 <div><a href="http://graphics.stanford.edu/~seander/bithacks.html">Some more hacks ;)</a></div>
 
+<div>
+  <pre>var key = _entries[ind].Key;
+
+mov rcx, qword ptr [rcx+0x20]
+mov r8, rcx
+mov r9d, dword ptr [r8+0x8]
+cmp edx, r9d
+jnb 0x7fff53830a3a
+movsxd r10, edx</pre></div>
+
 <div><img src="img/unsafe.jpg" alt=""></div>
 <div><em>Lesson 9: </em> All is Fair in Love and War</div>
 
@@ -479,29 +503,3 @@ jle 0x7ffcbc4238a1
 <div><strike>.NET vs JVM vs C++ vs ...</strike><br><br>
 In 99% cases <em>the bottleneck is a developer</em> not a platform
 </div>
-
-
-
-<!--
-
-TODO Branch prediction
-
-
-Classic hashset -> open address hashset
-
-Memory exploration
-
-
-
-#### Lesson 6: Know hacks
-
-MOD is expensive
-
-
-
-### Experiments
-#### .NET Core
-
-
-
--->
