@@ -13,13 +13,12 @@ The second part will be a demonstration. I'll show you how we can use different 
 Slack: https://adform.slack.com/archives/workshop-highperf-net
 
 ### Prerequisites:
-- Laptop (or a peer with a laptop)
-- Aho-Corasick algorithm: try to implement it by yourself.
+- Laptop (or a peer with a laptop) with dev environment 
+- Aho-Corasick algorithm: study and try to implement it by yourself
 - ILSpy
-- WinDBG [optional]
-- dotTrace [optional]
+- WinDBG
 - PerfView
-- Intel VTune Amplifier [optional]
+- Intel VTune Amplifier
 
 What it isn't about:
 * .NET vs JVM vs C++ vs ...
