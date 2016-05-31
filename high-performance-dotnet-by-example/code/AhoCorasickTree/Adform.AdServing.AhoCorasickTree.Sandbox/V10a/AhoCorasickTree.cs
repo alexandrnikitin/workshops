@@ -24,31 +24,27 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
                 SetFailureNodes();
 
                 // needed for offsets ;)
-                GetArraySize();
+                SetOffsets();
                 CreateArray();
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe char getKey(int* currentNodePtr, int ind)
+        private unsafe char getKey(byte* currentNodePtr, int ind)
         {
-            return *(char*)((byte*)currentNodePtr + sizeof(int) + sizeof(int) +
-                             ind * (sizeof(char) + sizeof(int)));
+            return *(char*)(currentNodePtr + sizeof(int) + sizeof(int) + ind * (sizeof(char) + sizeof(int)));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe int* getNext(byte* b, int* currentNodePtr, int ind)
+        private unsafe byte* getNext(byte* b, byte* currentNodePtr, int ind)
         {
-            var offset = sizeof(int) + sizeof(int) +
-                         ind * (sizeof(char) + sizeof(int)) + sizeof(char);
-            var n = *(int*)((byte*)currentNodePtr + offset);
-            return (int*)(b + n);
+            return b + *(int*)(currentNodePtr + (sizeof(int) + sizeof(int) + ind * (sizeof(char) + sizeof(int)) + sizeof(char)));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe int* GetFailure(byte* b, int* currentNodePtr)
+        private unsafe byte* GetFailure(byte* b, byte* currentNodePtr)
         {
-            return (int*)(b + *(int*)((byte*)currentNodePtr + sizeof(int)));
+            return b + *(int*)(currentNodePtr + sizeof(int));
         }
 
 
@@ -60,10 +56,9 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
                 char c1, c2, c3, c4;
                 int len = text.Length * 2;
                 long* lptr = (long*)p;
-                //lptr--;
                 long l;
 
-                int* currentNodePtr = (int*)b;
+                byte* currentNodePtr = b;
                 int size;
                 int ind;
                 char key;
@@ -81,7 +76,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
                     lptr++;
 
                     C1:
-                    size = *currentNodePtr;
+                    size = *(int*)currentNodePtr;
                     ind = c1 & (size - 1);
                     key = getKey(currentNodePtr, ind);
                     if (key == c1)
@@ -97,7 +92,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
                     }
 
                     C2:
-                    size = *currentNodePtr;
+                    size = *(int*)currentNodePtr;
                     ind = c2 & (size - 1);
                     key = getKey(currentNodePtr, ind);
                     if (key == c2)
@@ -113,7 +108,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
                     }
 
                     C3:
-                    size = *currentNodePtr;
+                    size = *(int*)currentNodePtr;
                     ind = c3 & (size - 1);
                     key = getKey(currentNodePtr, ind);
                     if (key == c3)
@@ -129,7 +124,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
                     }
 
                     C4:
-                    size = *currentNodePtr;
+                    size = *(int*)currentNodePtr;
                     ind = c4 & (size - 1);
                     key = getKey(currentNodePtr, ind);
                     if (key == c4)
@@ -153,7 +148,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
                     len -= 2;
 
                     C1:
-                    size = *currentNodePtr;
+                    size = *(int*)currentNodePtr;
                     ind = c1 & (size - 1);
                     key = getKey(currentNodePtr, ind);
                     if (key == c1)
@@ -338,7 +333,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
             _data = data.ToArray();
         }
 
-        private int GetArraySize()
+        private void SetOffsets()
         {
             var roots = 0;
             var elements = 0;
@@ -359,9 +354,6 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V10a
                     elements++;
                 }
             }
-
-
-            return calcOffset(roots, elements) * 2;
         }
 
         private int calcOffset(int roots, int childs)
