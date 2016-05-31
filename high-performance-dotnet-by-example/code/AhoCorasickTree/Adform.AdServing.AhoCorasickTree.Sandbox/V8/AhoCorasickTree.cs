@@ -25,15 +25,18 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V8
         {
             var currentNode = Root;
 
-            for (var i = 0; i < text.Length; i = i + 5)
+            var length = text.Length;
+            for (var i = 0; i < length; i = i + 2)
             {
                 while (true)
                 {
-                    var node = currentNode.GetTransition(text[i]);
+                    var c1 = text[i];
+                    var c2 = text[i+1];
+                    var node = currentNode.GetTransition(c1);
                     if (node == null)
                     {
                         currentNode = currentNode.Failure;
-                        if (currentNode == Root)
+                        if (currentNode == Root && i + 1 >= length)
                         {
                             break;
                         }
@@ -47,62 +50,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V8
                         currentNode = node;
                     }
 
-                    node = currentNode.GetTransition(text[i+1]);
-                    if (node == null)
-                    {
-                        currentNode = currentNode.Failure;
-                        if (currentNode == Root)
-                        {
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (node.IsWord)
-                        {
-                            return true;
-                        }
-                        currentNode = node;
-                    }
-
-                    node = currentNode.GetTransition(text[i+2]);
-                    if (node == null)
-                    {
-                        currentNode = currentNode.Failure;
-                        if (currentNode == Root)
-                        {
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (node.IsWord)
-                        {
-                            return true;
-                        }
-
-                        currentNode = node;
-                    }
-
-                    node = currentNode.GetTransition(text[i+3]);
-                    if (node == null)
-                    {
-                        currentNode = currentNode.Failure;
-                        if (currentNode == Root)
-                        {
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (node.IsWord)
-                        {
-                            return true;
-                        }
-                        currentNode = node;
-                    }
-
-                    node = currentNode.GetTransition(text[i+4]);
+                    node = currentNode.GetTransition(c2);
                     if (node == null)
                     {
                         currentNode = currentNode.Failure;

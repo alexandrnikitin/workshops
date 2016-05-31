@@ -46,7 +46,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V9
                         if (node == null)
                         {
                             currentNode = currentNode.Failure;
-                            if (currentNode == Root)
+                            if (currentNode == Root && c2 == '\0')
                             {
                                 break;
                             }
@@ -64,7 +64,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V9
                         if (node == null)
                         {
                             currentNode = currentNode.Failure;
-                            if (currentNode == Root)
+                            if (currentNode == Root && c3 == '\0')
                             {
                                 break;
                             }
@@ -82,7 +82,7 @@ namespace Adform.AdServing.AhoCorasickTree.Sandbox.V9
                         if (node == null)
                         {
                             currentNode = currentNode.Failure;
-                            if (currentNode == Root)
+                            if (currentNode == Root && c4 == '\0')
                             {
                                 break;
                             }
