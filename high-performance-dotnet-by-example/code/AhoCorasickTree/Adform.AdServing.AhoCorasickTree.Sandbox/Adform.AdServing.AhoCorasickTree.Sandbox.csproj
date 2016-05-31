@@ -55,8 +55,6 @@
     <Compile Include="V6\AhoCorasickTreeNode.cs" />
     <Compile Include="V5\AhoCorasickTree.cs" />
     <Compile Include="V5\AhoCorasickTreeNode.cs" />
-    <Compile Include="V5_old\AhoCorasickTree.cs" />
-    <Compile Include="V5_old\AhoCorasickTreeNode.cs" />
     <Compile Include="V4\AhoCorasickTree.cs" />
     <Compile Include="V4\AhoCorasickTreeNode.cs" />
     <Compile Include="V3\AhoCorasickTree.cs" />
