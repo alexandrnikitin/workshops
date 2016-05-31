@@ -237,7 +237,7 @@ window.onload = function() {
 <div><em>Lesson 0:</em> First efficiency then performance</div>
 <div>Used in grep</div>
 
-
+<div><em>Demo: </em> Review the current implementation</div>
 
 
 <div><em>Harness</em></div>
@@ -246,17 +246,17 @@ window.onload = function() {
 
 <div>
   Pipeline: <br><br>
-  A task -> C# <br>
-  C# + Compiler -> IL <br>
-  IL + BCL + 3rdParty -> App <br>
-  App + CLR -> ASM <br>
-  ASM + CPU -> Result <br>
+  A task → C# <br>
+  C# + Compiler → IL <br>
+  IL + BCL + 3rdParty → App <br>
+  App + CLR → ASM <br>
+  ASM + CPU → Result <br>
 </div>
 
 <div>
   Infrastructure: <br><br>
-  <b>OS:</b> Windows, Linux, OS X <br>
-  Compilers: Legacy, Roslyn <br>
+  OS: Windows, Linux, OS X <br>
+  Compilers: CSC, Roslyn <br>
   CLR: CLR2, CLR4, CoreCLR, Mono <br>
   GC: MS, Boehm, Sgen <br>
   JIT: Legacy x86 & x64, RyuJIT <br>
@@ -334,6 +334,14 @@ window.onload = function() {
   <em>Demo:</em> Intel VTune Amplifier
 </div>
 
+<div><em>Task:</em> find the bottleneck</div>
+<div><em>Task:</em> optimize it</div>
+<div><em>Lesson 1:</em> Know APIs</div>
+
+<div><em>Demo:</em> use production data</div>
+<div><em>Task:</em> write a benchmark that uses real data</div>
+<div><em>Lesson 2:</em> Use production data</div>
+
 
 <div><em>Disassemble</em></div>
 <div>
@@ -353,7 +361,7 @@ window.onload = function() {
 
 
 <div><em>ASM code</em></div>
-<div>Way to get the guts:
+<div>Ways to get the guts:
   <ul>
     <li>Visual Studio</li>
     <li>WinDBG</li>
@@ -372,21 +380,31 @@ window.onload = function() {
   <a href="https://github.com/Microsoft/clrmd">CLRMD</a><br><br>
 </div>
 
+<div><pre>
+sxe ld:mscorlib
+g
+.loadby sos clr
+sxe ld:clrjit
+g
+
+!dumpdomain
+!dumpdomain 000000a930db1d10
+!dumpmodule -mt 00007ffc5b172fc8
+!dumpmt -md 00007ffc5b174028
+!bpmd -md 00007ffc5b174010
+!u eip
+
+!dumpmd 000007fa66f83878
+!dumpil 000007fa670a0270
+!U 000007fa670a0270
+</pre></div>
+
 <div>More reads: <br><br>
   <a href="https://www.nayuki.io/page/a-fundamental-introduction-to-x86-assembly-programming">A fundamental introduction to x86 assembly programming </a>
 </div>
 
 <div><em>Task:</em> get the guts</div>
 
-
-<div><em>Optimizations</em></div>
-<div><em>Task:</em> find the bottleneck</div>
-<div><em>Task:</em> optimize it</div>
-<div><em>Lesson 1:</em> Know APIs</div>
-
-<div><em>Demo:</em> use production data</div>
-<div><em>Task:</em> write a benchmark that uses real data</div>
-<div><em>Lesson 2:</em> Use production data</div>
 
 <div><em>Demo: </em> Perfview & memory profiling</div>
 <div><em>Demo: </em> BenchmarkDotNet & MemoryDiagnoser</div>
@@ -398,13 +416,14 @@ window.onload = function() {
 <div><em>Demo: </em> Time for a MR</div>
 
 
+<div><em>Demo: </em> Review the dictionary implementation</div>
 <div><em>Lesson 4: </em> Know data structures</div>
 <div>BCL is too generic and isn't suitable for high performance</div>
 
 
 
 
-<div><em>Demo: </em>Intel VTune Amplifier
+<div><em>Demo: </em>Intel VTune Amplifier <br><br>
 Basic hotspots -> Memory access
 </div>
 
@@ -429,23 +448,9 @@ Memory writes & reads for a call
 var transition = GetTransition(c, ref pointer);
 ```
 push & pop from the stack
-
-
-
-
-Memory reads
-```
-if (pointer.Results.Count > 0)
-```
-```
-mov rax, qword ptr [rsp+0x28]
-mov rax, qword ptr [rax+0x10]
-cmp dword ptr [rax+0x18], 0x0
-jle 0x7ffcbc4238a1
-```
 -->
 
-<div><em>Demo: </em>Intel VTune Amplifier General Exploration</div>
+<div><em>Demo: </em>Intel VTune Amplifier <br>General Exploration</div>
 
 <div><em>how CPU works</em></div>
 <div><img src="img/cpu.jpg" alt=""></div>
@@ -479,8 +484,10 @@ jle 0x7ffcbc4238a1
   <a href="https://gist.github.com/ocornut/cb980ea183e848685a36">Memory, Cache, CPU optimization resources</a>
 </div>
 
+<div><em>Demo: </em>Memory access & cache misses (PerfView?)</div>
 <div><em>Lesson 6: </em> Know advanced data structures</div>
 
+<div><em>Demo: </em>Advanced Hotspots</div>
 <div><em>Lesson 7: </em> Know hacks</div>
 <div><a href="http://graphics.stanford.edu/~seander/bithacks.html">Some more hacks ;)</a></div>
 
