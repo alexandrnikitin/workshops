@@ -1,3 +1,3 @@
-## My workshops materials:
+## My workshops:
 
 1. "High performance .NET by example" https://github.com/alexandrnikitin/workshops/tree/master/high-performance-dotnet-by-example
