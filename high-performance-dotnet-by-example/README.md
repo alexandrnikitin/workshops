@@ -10,7 +10,7 @@ We will find main bottlenecks and optimize performance significantly.
 
 The second part will be a demonstration. I'll show you how we can use different tools and improve performance by tens times using different optimization techniques.
 
-Slides: http://alexandrnikitin.github.io/workshops/high-performance-dotnet-by-example/slides/
+Slides: http://alexandrnikitin.github.io/workshops/high-performance-dotnet-by-example/slides/  
 Slack: https://adform.slack.com/archives/workshop-highperf-net
 
 ### Prerequisites:
