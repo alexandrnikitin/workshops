@@ -12,10 +12,10 @@ sudo pip install -r work/automated-feature-engineering-selection/requirements.tx
 Content:
 
 1. Meet featuretools - a python library for automated feature engineering
-	Intro 
-	Featuretools by example
-	Scale Featuretools
+	1. [Intro](https://github.com/alexandrnikitin/workshops/blob/master/automated-feature-engineering-selection/notebooks/1-featuretools-intro.ipynb)
+	2. [Featuretools by example](https://github.com/alexandrnikitin/workshops/blob/master/automated-feature-engineering-selection/notebooks/2-featuretools-by-example.ipynb)
+	3. [Scale Featuretools](https://github.com/alexandrnikitin/workshops/blob/master/automated-feature-engineering-selection/notebooks/3-featuretools-scale.ipynb)
 	
 2. Automated feature selection
 
-	1. Examples of statistics, ML algorithms wrappers and embedded techniques.
+	1. [Examples of statistics, ML algorithms wrappers and embedded techniques.](https://github.com/alexandrnikitin/workshops/blob/master/automated-feature-engineering-selection/notebooks/4-feature-selection.ipynb)
